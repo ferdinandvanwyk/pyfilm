@@ -1,2 +1,2 @@
 # pyfilm
-Creates nice films of python arrays
+Creates film of a 2D python array in time.
