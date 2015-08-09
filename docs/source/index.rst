@@ -6,7 +6,12 @@
 Welcome to pyfilm's documentation!
 ==================================
 
-Contents:
+.. image:: https://readthedocs.org/projects/pyfilm/badge/?version=latest
+   :target: https://readthedocs.org/projects/pyfilm/badge/?version=latest
+   :alt: Documentation Status
+
+Contents
+---------
 
 .. toctree::
    :maxdepth: 2
