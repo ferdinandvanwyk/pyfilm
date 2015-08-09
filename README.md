@@ -1,6 +1,8 @@
 pyfilm
 ======
 
+[![Documentation Status](https://readthedocs.org/projects/pyfilm/badge/?version=latest)](https://readthedocs.org/projects/pyfilm/?badge=latest)
+
 Creates films of 1D and 2D python arrays in time.
 
 Getting Started
