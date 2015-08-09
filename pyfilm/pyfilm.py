@@ -103,9 +103,9 @@ def make_film_1d(*args, **kwargs):
                   "_%05d.png' -q 1 films/" + str(options['fname']) + ".mp4")
     elif options['encoder'] == 'ffmpeg':
         os.system("ffmpeg -threads " + str(options['threads']) + " -y "
-                  "-r " + str(options['fps']) + "-pix_fmt yuv420p -c:v libx264"
-                  " -i " + "'films/film_frames/" + str(options['fname']) + 
-                  "_%05d.png' -q 1 films/" + str(options['fname']) + ".mp4")
+                  "-r " + str(options['fps']) + " -i " + "'films/film_frames/" 
+                  + str(options['fname']) + "_%05d.png' -pix_fmt yuv420p -c:v "
+                  "libx264 -q 1 films/" + str(options['fname']) + ".mp4")
 
 def make_film_2d(*args, **kwargs):
     """
