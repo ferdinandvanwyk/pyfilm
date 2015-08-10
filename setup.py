@@ -18,7 +18,7 @@ setup(
     license = "GNU",
     keywords = ['film', 'animation', 'array', 'numpy'],
     packages=['pyfilm', 'tests', 'docs'],
-    long_description=read('README.md'),
+    long_description=read('README.rst'),
     url = 'git@github.com:ferdinandvwyk/pyfilm.git',
     classifiers=[],
 )
