@@ -142,7 +142,7 @@ changes to the documentation files The current build status is shown by the
 ``docs`` badge at the top of the main page. To make the docs, run:
 
 .. _numpydoc: https://github.com/numpy/numpydoc
-.. _`Read the Docs`: pyfilm.rtfd.org
+.. _`Read the Docs`: https://readthedocs.org/projects/pyfilm/
 
 .. code:: bash
 
