@@ -246,8 +246,8 @@ def find_encoder(options):
                                'installed.')
     elif a and f:
         raise EnvironmentError('This system has both FFMPEG and AVCONV '
-                               'installed. Please choose one by setting '
-                               '"encoder" in the options dict.')
+                               'installed. Defaulting to AVCONV.')
+        options['encoder'] = 'avconv'
     elif a and not f:
         options['encoder'] = 'avconv'
     elif f and not a:
