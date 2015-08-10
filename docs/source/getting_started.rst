@@ -32,14 +32,15 @@ For OSX using the Brew package manager, these can be installed via:
 `pyfilm` will automatically check which of these is installed on your system 
 and default to `avconv` if both are found.
 
-Refer to [this](http://matplotlib.org/faq/usage_faq.html#what-is-a-backend) 
+Refer to this_  
 page to deal with Matplotlib backends in case plots don't display. TkAgg is a
 good backend for most machines. Be sure to have the system packages installed 
 before installing matplotlib.
 
-.. _libpng: www.libpng.org/pub/png/libpng.html)
+.. _libpng: http://www.libpng.org/pub/png/libpng.html
 .. _libav: https://libav.org/ 
 .. _ffmpeg: https://www.ffmpeg.org/
+.. _this: http://matplotlib.org/faq/usage_faq.html#what-is-a-backend
 
 Python dependencies
 -------------------
