@@ -1,5 +1,6 @@
 import os
 import shutil
+import warnings
 
 import numpy as np
 from cpuinfo import cpuinfo
@@ -245,8 +246,8 @@ def find_encoder(options):
         raise EnvironmentError('This system does not have FFMPEG or AVCONV '
                                'installed.')
     elif a and f:
-        raise EnvironmentError('This system has both FFMPEG and AVCONV '
-                               'installed. Defaulting to AVCONV.')
+        warnings.warn('This system has both FFMPEG and AVCONV installed. '
+                      'Defaulting to AVCONV.')
         options['encoder'] = 'avconv'
     elif a and not f:
         options['encoder'] = 'avconv'
