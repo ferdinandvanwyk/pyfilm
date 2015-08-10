@@ -46,7 +46,7 @@ running:
 Since this project is structured as a PIP package, it also needs to be installed
 using the following command (in the package root directory):
 
-    $ pip install -e .
+    $ python setup.py install
 
 Importing
 ---------
@@ -83,17 +83,3 @@ Examples
     y = np.random.rand(10, 10)
     pf.make_film_1d(x, y, plot_options={'lw':3, 'ls':'--'}, 
                     options={'ylabel':'Amplitude', 'fname':'amp'})
-
-
-
-
-
-
-
-
-
-
-
-
-
-

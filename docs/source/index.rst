@@ -20,6 +20,7 @@ Contents
 .. toctree::
    :maxdepth: 2
 
+   getting_started.rst
    api_methods.rst
    non_api_methods.rst
 
