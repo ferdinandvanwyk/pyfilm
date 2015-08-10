@@ -10,7 +10,6 @@ addons:
     apt:
         packages:
         - libpng-dev
-        - ffmpeg 
         - libav-tools
 before_install:
     - pip install -U pip
