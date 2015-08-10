@@ -1,8 +1,8 @@
 pyfilm
 ======
 
-[![Documentation Status](https://readthedocs.org/projects/pyfilm/badge/?version=latest)](https://readthedocs.org/projects/pyfilm/?badge=latest)
 [![Build Status](https://travis-ci.org/ferdinandvwyk/pyfilm.svg?branch=master)](https://travis-ci.org/ferdinandvwyk/pyfilm)
+[![Documentation Status](https://readthedocs.org/projects/pyfilm/badge/?version=latest)](https://readthedocs.org/projects/pyfilm/?badge=latest)
 [![Coverage Status](https://coveralls.io/repos/ferdinandvwyk/pyfilm/badge.svg?branch=master&service=github)](https://coveralls.io/github/ferdinandvwyk/pyfilm?branch=master)
 
 Creates films of 1D and 2D python arrays in time.
