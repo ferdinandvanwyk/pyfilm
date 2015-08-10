@@ -4,7 +4,7 @@ pyfilm
 .. image:: https://travis-ci.org/ferdinandvwyk/pyfilm.svg?branch=master
    :target: https://travis-ci.org/ferdinandvwyk/pyfilm
 .. image:: https://readthedocs.org/projects/pyfilm/badge/?version=latest
-   :target: https://readthedocs.org/projects/pyfilm/badge/?version=latest
+   :target: https://readthedocs.org/projects/pyfilm
    :alt: Documentation Status
 .. image:: https://coveralls.io/repos/ferdinandvwyk/pyfilm/badge.svg?branch=master&service=github 
    :target: https://coveralls.io/github/ferdinandvwyk/pyfilm?branch=master
