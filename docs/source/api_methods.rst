@@ -30,9 +30,18 @@ options.
 Options
 -------
 
-The options dictionary controls plot options not included in plot_dict (e.g. 
-axis labels, plot limits, etc.) as well as how the program behaves. An 
-exhaustive list is produced below.
+The options dictionary controls plot options not included in plot_options (e.g. 
+axis labels, plot limits, etc.) as well as how the program behaves. A complete 
+list of parameters implemented so far in `pyfilm` is produced below.
+
+Example:
+
+.. code-block:: python
+   
+   import numpy as np
+   import pyfilm as pf
+
+   pf.make_film_1d(np.random.rand(10,10), options={'fps':20, 'xlim':[0,1.5]})
 
 ================ =============== ==============================================
 Option           Default [#f1]_  Value Type                          
