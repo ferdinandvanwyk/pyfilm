@@ -13,5 +13,7 @@ setup(
     keywords = ['film', 'animation', 'numpy', 'ffmpeg', 'avconv'],
     packages=['pyfilm', 'tests', 'docs'],
     url = 'https://github.com/ferdinandvwyk/pyfilm.git',
-    classifiers=[],
+    classifiers=[
+    "Development Status :: 3 - Alpha"
+    ],
 )
