@@ -17,7 +17,7 @@ Getting Started
 Python version support
 ----------------------
 
-Currently, *pyfilm* only support Python versions 3.x, however it is only tested
+Currently *pyfilm* only support Python versions 3.x, however it is only tested
 with 3.4.
 
 System dependencies
