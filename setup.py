@@ -11,14 +11,14 @@ def read(fname):
 
 setup(
     name = "pyfilm",
-    version = "0.0.1",
+    version = "0.1.0",
     author = "Ferdinand van Wyk",
-    description = ("Create films of 2D python arrays in time."),
+    author_email = 'ferdinandvwyk@gmail.com',
+    description = "Create films of 1D and 2D python arrays.",
     license = "GNU",
-    keywords = "film animation array numpy",
+    keywords = ['film', 'animation', 'array', 'numpy'],
     packages=['pyfilm', 'tests', 'docs'],
     long_description=read('README.md'),
-    classifiers=[
-        "Development Status :: 3 - Alpha",
-    ],
+    url = 'git@github.com:ferdinandvwyk/pyfilm.git',
+    classifiers=[],
 )
