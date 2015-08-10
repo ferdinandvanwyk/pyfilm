@@ -169,6 +169,11 @@ def make_film_2d(*args, **kwargs):
 def set_default_options(options):
     """
     Sets the default options.
+
+    Parameters
+    ----------
+    options : dict
+        Dictionary of options which control various program functions.
     """
 
     options['title'] = ''
@@ -198,6 +203,14 @@ def set_user_options(options, user_options):
 
     An exhastive list of the available options is given in a table in the 
     documentation.
+
+    Parameters
+    ----------
+
+    options : dict
+        Dictionary of options which control various program functions.
+    user_options : dict 
+        Dictionary of options passed in by the user as a keyword argument.
     """
     for key, value in user_options.items():
         options[key] = value
@@ -220,6 +233,15 @@ def check_data_1d(x, y):
 
     These checks are only done when both x and y arguments are passed into the
     function.
+
+    Parameters
+    ----------
+
+    x : array_like, 
+        Array specifying the x axis.
+    y : array_like
+        Two dimensional array assumed to be of the form y(t, x). This specifies
+        the values to be plotted as a function of time.
     """
     x_s = x.shape 
     y_s = y.shape 
@@ -233,6 +255,16 @@ def check_data_2d(x, y, z):
 
     These checks are only done when both x, y, and z arguments are passed into 
     the function.
+
+    Parameters
+    ----------
+    x : array_like
+        Array specifying the x axis.
+    y : array_like
+        Array specifying the y axis.
+    z : array_like
+        Three dimensional array assumed to be of the form z(t, x, y). This 
+        specifies the values to be plotted as a function of time.
     """
     x_s = x.shape 
     y_s = y.shape 
@@ -247,6 +279,11 @@ def check_data_2d(x, y, z):
 def find_encoder(options):
     """
     Determines which encoder the user has on their system.
+
+    Parameters
+    ----------
+    options : dict, 
+        Dictionary of options which control various program functions.
     """
 
     f = shutil.which('ffmpeg')
@@ -282,8 +319,8 @@ def calculate_cbar_ticks(z, options):
 
     z : array_like
         The 3D array being plotted: z(x, y).
-    options : dict
-        Dictionary of program options.
+    options : dict 
+        Dictionary of options which control various program functions.
     """
 
     z_min = np.min(z)
@@ -315,6 +352,23 @@ def calculate_cbar_ticks(z, options):
 def plot_1d(it, x, y, plot_options, options):
     """
     Plot the 1D graph for a given time step.
+
+    Parameters
+    ----------
+
+    it : int
+        Time index being plotted.
+    x : array_like 
+        Array specifying the x axis.
+    y : array_like
+        Two dimensional array assumed to be of the form y(t, x). This specifies
+        the values to be plotted as a function of time.
+    plot_options : dict
+        Dictionary of plot customizations which are evaluated for each plot, 
+        e.g. when plot is called it will be called as 
+        plt.plot(x, y, **plot_options)
+    options : dict 
+        Dictionary of options which control various program functions.
     """
 
     print('\rSaving frame ', it, end='')
@@ -338,6 +392,25 @@ def plot_1d(it, x, y, plot_options, options):
 def plot_2d(it, x, y, z, plot_options, options):
     """
     Plot the 2D contour plot for a given time step.
+
+    Parameters
+    ----------
+
+    it : int
+        Time index being plotted.
+    x : array_like
+        Array specifying the x axis.
+    y : array_like
+        Array specifying the y axis.
+    z : array_like
+        Three dimensional array assumed to be of the form z(t, x, y). This 
+        specifies the values to be plotted as a function of time.
+    plot_options : dict
+        Dictionary of plot customizations which are evaluated for each plot, 
+        e.g. when plot is called it will be called as 
+        plt.plot(x, y, **plot_options)
+    options : dict 
+        Dictionary of options which control various program functions.
     """
 
     print('\rSaving frame ', it, end='')
@@ -377,6 +450,14 @@ def crop_images(nt, options):
     found online is to use the `-vf` flag for avconv to control the output
     size but this does not seem to work. The most reliable solution 
     therefore is to use Pillow to load and crop images.
+
+    Parameters
+    ----------
+
+    nt : int 
+        Length of the time dimension.
+    options : dict, 
+        Dictionary of options which control various program functions.
     """
 
     w = np.empty([nt], dtype=int)
