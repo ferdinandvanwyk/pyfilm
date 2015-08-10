@@ -84,7 +84,7 @@ Simply import into your project via:
 Examples
 --------
 
-1D Example:
+1D Example: *pyfilm* expects y to be of the form *y(t, x)*
 
 .. code:: bash
 
@@ -94,7 +94,7 @@ Examples
     y = np.random.rand(10, 10)
     pf.make_film_1d(x, y)
 
-2D Example:
+2D Example: *pyfilm* expects z to be of the form *z(t, x, y)*
 
 .. code:: bash
 
