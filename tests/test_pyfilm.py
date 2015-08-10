@@ -3,6 +3,8 @@ import os
 import pytest
 import numpy as np
 from PIL import Image
+import matplotlib
+matplotlib.use('Agg') # specifically for Travis CI to avoid backend errors
 
 from pyfilm.pyfilm import *
 

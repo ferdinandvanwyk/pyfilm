@@ -1,0 +1,7 @@
+[run]
+source = pyfilm
+[report]
+omit = 
+    */python?.?/*
+    *__init__*
+    *__pycache__*
