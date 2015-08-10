@@ -16,6 +16,17 @@
 import sys
 import os
 import shlex
+from unittest.mock import MagicMock
+
+# Specify mock modules so they don't get built on RTD
+class Mock(MagicMock):
+    @classmethod
+    def __getattr__(cls, name):
+            return Mock()
+
+MOCK_MODULES = ['numpy', 'scipy', 'matplotlib', 'matplotlib.pyplot',
+                'mpl_toolkits.axes_grid1','PIL', 'cpuinfo']
+sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES) 
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -116,7 +127,7 @@ todo_include_todos = False
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'alabaster'
+html_theme = 'classic'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
