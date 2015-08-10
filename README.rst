@@ -17,13 +17,13 @@ Getting Started
 Python version support
 ----------------------
 
-Currently, `pyfilm` only support Python versions 3.x, however it is only tested
+Currently, *pyfilm* only support Python versions 3.x, however it is only tested
 with 3.4.
 
 System dependencies
 -------------------
 
-`pyfilm` generates a .png file for each timestep and stitches them together using
+*pyfilm* generates a .png file for each timestep and stitches them together using
 ffmpeg/avconv. The following non-system specific packages are therefore 
 required:
 
@@ -42,8 +42,8 @@ For OSX using the Brew package manager, these can be installed via:
 
     brew install libpng ffmpeg
 
-`pyfilm` will automatically check which of these is installed on your system 
-and default to `avconv` if both are found.
+*pyfilm* will automatically check which of these is installed on your system 
+and default to ``avconv`` if both are found.
 
 Refer to this_  
 page to deal with Matplotlib backends in case plots don't display. TkAgg is a
@@ -119,7 +119,7 @@ Examples
 Running Tests
 -------------
 
-`pyfilm` uses the pytest framework for unit and functional tests. To 
+*pyfilm* uses the pytest framework for unit and functional tests. To 
 run the tests, run the following in the package root directory:
 
 .. code:: bash
@@ -135,11 +135,14 @@ To see information on the test coverage for individual files:
 Documentation
 -------------
 
-The documentation is completely built on Sphinx with `numpydoc` docstring 
-convention and is hosted on `Read the Docs`_: pyfilm.rtfd.org_. Using 
+The documentation is completely built on Sphinx with numpydoc_ docstring 
+convention and is hosted on `Read the Docs`_. Using 
 RTD/GitHub webhooks, the documentation is rebuilt upon every commit that makes
 changes to the documentation files The current build status is shown by the 
 ``docs`` badge at the top of the main page. To make the docs, run:
+
+.. _numpydoc: https://github.com/numpy/numpydoc
+.. _`Read the Docs`: pyfilm.rtfd.org
 
 .. code:: bash
 
