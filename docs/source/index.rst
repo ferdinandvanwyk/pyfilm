@@ -10,7 +10,9 @@ Welcome to pyfilm's documentation!
    :target: https://readthedocs.org/projects/pyfilm/badge/?version=latest
    :alt: Documentation Status
 .. image:: https://travis-ci.org/ferdinandvwyk/pyfilm.svg?branch=master
-    :target: https://travis-ci.org/ferdinandvwyk/pyfilm
+   :target: https://travis-ci.org/ferdinandvwyk/pyfilm
+.. image:: https://coveralls.io/repos/ferdinandvwyk/pyfilm/badge.svg?branch=master&service=github 
+   :target: https://coveralls.io/github/ferdinandvwyk/pyfilm?branch=master
 
 Contents
 ---------
