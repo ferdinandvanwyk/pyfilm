@@ -1,0 +1,35 @@
+language: python
+python:
+  - "3.4"
+notifications:
+    email: 
+        on_success: change
+        on_failure: change
+# Install apt-get packages on new container-based infrastructure
+addons:
+    apt:
+        packages:
+        - libpng-dev
+        - ffmpeg 
+        - libav-tools
+before_install:
+    - pip install -U pip
+# Use Miniconda for faster building
+    - wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+    - chmod +x miniconda.sh
+    - bash miniconda.sh -b -p $HOME/miniconda
+    - export PATH="$HOME/miniconda/bin:$PATH"
+    - hash -r
+    - conda config --set always_yes yes --set changeps1 no
+    - conda update -q conda
+# command to install dependencies
+install: 
+    - conda install --yes python=$TRAVIS_PYTHON_VERSION pip numpy matplotlib Pillow
+    - pip install pytest  # not yet available for py3 in anaconda 
+    - pip install pytest-cov coverage coveralls
+    - python setup.py install
+# command to run tests
+script: 
+    - py.test --cov gs2_correlation
+after_success:
+    - coveralls --verbose
