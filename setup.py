@@ -11,6 +11,6 @@ setup(
     license = "GNU",
     keywords = ['film', 'animation', 'array', 'numpy'],
     packages=['pyfilm', 'tests', 'docs'],
-    url = 'git@github.com:ferdinandvwyk/pyfilm.git',
+    url = 'https://github.com/ferdinandvwyk/pyfilm.git',
     classifiers=[],
 )
