@@ -9,7 +9,7 @@ pyfilm
 .. image:: https://coveralls.io/repos/ferdinandvwyk/pyfilm/badge.svg?branch=master&service=github 
    :target: https://coveralls.io/github/ferdinandvwyk/pyfilm?branch=master
 
-Creates films of 1D and 2D python arrays.
+Easily create films of 1D and 2D python arrays.
 
 Getting Started
 ===============
