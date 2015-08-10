@@ -34,20 +34,34 @@ The options dictionary controls plot options not included in plot_dict (e.g.
 axis labels, plot limits, etc.) as well as how the program behaves. An 
 exhaustive list is produced below.
 
-======================= =========== ===========================================
-Option                  Default     Value Type                          
-======================= =========== ===========================================
-xlabel                  'x'         String specifying xlabel. May include LaTeX. 
-ylabel                  'y'         String specifying ylabel. May include LaTeX. 
-xlim                    None        Array of x-axis limits
-ylim                    None        Array of y-axis limits
-grid                    True        Boolean controlling plot gridlines
-encoder                 None        Specifies the encoder to be used by pyfilm
-fps                     10          Frames per second of the film                      
-fname                   'y'         Name of film frames and film
-crop                    True        Set whether images are cropped or not
-threads                 auto        Set max number of threads to use
-======================= =========== =========================================== 
+================ =============== ==============================================
+Option           Default [#f1]_  Value Type                          
+================ =============== ==============================================
+aspect           'auto'          ['auto' | 'equal' | float] Set plot aspect 
+                                 ratio.
+cbar_label       'z'             [str] Label of the contour plot color bar
+cbar_ticks       None            [None | int | np.ndarray] Set the color bar ticks
+cbar_tick_format '%.2f'          [str] Print format of the color bar ticks
+crop             True            [True | False] Crops images before encoding
+dpi              None            [None | int] DPI of saved images. Defaults to
+                                 savefig.dpi value in matplotlibrc file.
+encoder          None            [None | 'ffmpeg' | 'avconv'] Specifies the 
+                                 encoder to be used by pyfilm
+file_name        'f'             [str] Name of film frames and film. Appended 
+                                 with '1d' or '2d' and the frame number.
+fps              10              [int] Frames per second of the film                      
+grid             True            [True | False] Controls plotting of gridlines
+title            ''              [str] Specify title
+threads          None            [None | int] Set max number of threads to use
+xlabel           'x'             [str] Specify xlabel. May include LaTeX. 
+xlim             None            [None | array] Set x-axis limits
+ylabel           'y'             [str] Specify ylabel. May include LaTeX. 
+ylim             None            [None | array] Set y-axis limits
+================ =============== ============================================== 
+
+.. rubric:: Footnotes
+
+.. [#f1] None implies that the value is automatically determined.
 
 Performance considerations
 --------------------------
