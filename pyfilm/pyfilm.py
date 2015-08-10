@@ -1,3 +1,12 @@
+"""                                                                             
+.. module:: pyfilm 
+   :platform: Unix, OSX                                                         
+   :synopsis: Main pyfilm functions.
+
+.. moduleauthor:: Ferdinand van Wyk <ferdinandvwyk@gmail.com>                   
+                                                                                
+"""
+
 import os
 import shutil
 import warnings
@@ -15,6 +24,7 @@ def make_film_1d(*args, **kwargs):
 
     Parameters
     ----------
+
     x : array_like, optional
         Array specifying the x axis.
     y : array_like
