@@ -30,6 +30,6 @@ install:
     - python setup.py install
 # command to run tests
 script: 
-    - py.test --cov pyfilm
+    - py.test --cov pyfilm tests
 after_success:
     - coveralls --verbose
