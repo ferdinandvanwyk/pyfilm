@@ -2,6 +2,7 @@ pyfilm
 ======
 
 [![Documentation Status](https://readthedocs.org/projects/pyfilm/badge/?version=latest)](https://readthedocs.org/projects/pyfilm/?badge=latest)
+[![Build Status](https://travis-ci.org/ferdinandvwyk/pyfilm.svg?branch=master)](https://travis-ci.org/ferdinandvwyk/pyfilm)
 
 Creates films of 1D and 2D python arrays in time.
 
