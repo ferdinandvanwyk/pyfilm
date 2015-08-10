@@ -24,6 +24,10 @@ For example on Ubuntu 14.04 these are installed via:
 
     sudo apt-get install libpng12-dev libav-tools
 
+For OSX using the Brew package manager, these can be installed via:
+
+    brew install libpng ffmpeg
+
 `pyfilm` will automatically check which of these is installed on your system.
 
 Refer to [this](http://matplotlib.org/faq/usage_faq.html#what-is-a-backend) 
@@ -51,8 +55,10 @@ Simply import into your project via:
 
     import pyfilm as pf
 
-1D Example
-----------
+Examples
+--------
+
+1D Example:
 
     import numpy as np
 
@@ -60,8 +66,7 @@ Simply import into your project via:
     y = np.random.rand(10, 10)
     pf.make_film_1d(x, y)
 
-2D Example
-----------
+2D Example:
 
     import numpy as np
 
@@ -70,8 +75,7 @@ Simply import into your project via:
     z = np.random.rand(10, 10, 10)
     pf.make_film_2d(x, y, z)
 
-1D Example - Styling and options
---------------------------------
+1D Example wiht styling and options:
 
     import numpy as np
 
