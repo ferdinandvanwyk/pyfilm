@@ -52,7 +52,7 @@ class TestClass(object):
         x = np.arange(5)
         y = np.random.rand(5,4)
         pytest.raises(ValueError, "check_data_1d(x,y)")
-
+        
     def test_plot_1d(self):
         x = np.arange(2)
         y = np.random.rand(2,2)
@@ -74,6 +74,11 @@ class TestClass(object):
         assert ('f_1d_00000.png' in os.listdir('films/film_frames/'))
         assert ('f_1d.mp4' in os.listdir('films/'))
         
+    def test_1d_argumets(self):
+        x = np.arange(2)
+        y = np.random.rand(2,2)
+        pytest.raises(ValueError, "make_film_1d(x, x, y)")
+        
     def test_crop_images(self):
         x = np.arange(2)
         y = np.random.rand(2,2)
@@ -85,6 +90,12 @@ class TestClass(object):
                  
     def test_2d_1_arg(self):
         z = np.random.rand(2,2,2)
+        make_film_2d(z)
+        assert ('f_2d_00000.png' in os.listdir('films/film_frames/'))
+        assert ('f_2d.mp4' in os.listdir('films/'))
+
+    def test_2d_1_arg_negative(self):
+        z = np.array([[[-10,  -6], [  1,  -5]],[[  0,  -8],[ -1,  -3]]]) 
         make_film_2d(z)
         assert ('f_2d_00000.png' in os.listdir('films/film_frames/'))
         assert ('f_2d.mp4' in os.listdir('films/'))
@@ -105,3 +116,19 @@ class TestClass(object):
         options = {}
         options = set_default_options(options)
         plot_2d(0, x, y, z, plot_options={}, options=options)
+
+    def test_check_data_2d(self):
+        x = np.arange(5)
+        y = np.arange(5)
+        z = np.random.rand(5,4,5)
+        pytest.raises(ValueError, "check_data_2d(x,y,z)")
+        z = np.random.rand(5,5,4)
+        pytest.raises(ValueError, "check_data_2d(x,y,z)")
+
+    def test_2d_argumets(self):
+        x = np.arange(2)
+        y = np.arange(2)
+        z = np.random.rand(2,2,2)
+        pytest.raises(ValueError, "make_film_2d(x, z)")
+        pytest.raises(ValueError, "make_film_2d(x, y, y, z)")
+        
