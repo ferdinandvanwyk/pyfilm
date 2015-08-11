@@ -25,7 +25,7 @@ class Mock(MagicMock):
             return Mock()
 
 MOCK_MODULES = ['numpy', 'scipy', 'matplotlib', 'matplotlib.pyplot',
-                'mpl_toolkits.axes_grid1','PIL', 'cpuinfo']
+                'mpl_toolkits.axes_grid1','PIL', 'cpuinfo', 'clint']
 sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES) 
 
 # If extensions (or modules to document with autodoc) are in another directory,
