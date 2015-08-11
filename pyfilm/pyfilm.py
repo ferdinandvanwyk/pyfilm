@@ -17,6 +17,7 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 from PIL import Image
 from mpl_toolkits.axes_grid1 import make_axes_locatable
+from clint.textui import progress
 
 def make_film_1d(*args, **kwargs):
     """
@@ -68,7 +69,7 @@ def make_film_1d(*args, **kwargs):
     else:
         raise ValueError('This function only takes in max. 2 arguments.')
 
-    for it in range(nt):
+    for it in progress.bar(range(nt)):
         plot_1d(it, x, y, plot_options, options)
 
     if options['crop']:
@@ -149,7 +150,7 @@ def make_film_2d(*args, **kwargs):
     elif type(options['cbar_ticks']) == int or options['cbar_ticks'] == None:
         options = calculate_cbar_ticks(z, options)
 
-    for it in range(nt):
+    for it in progress.bar(range(nt)):
         plot_2d(it, x, y, z, plot_options, options)
     
     if options['crop']:
@@ -371,7 +372,6 @@ def plot_1d(it, x, y, plot_options, options):
         Dictionary of options which control various program functions.
     """
 
-    print('\rSaving frame ', it, end='')
     plt.clf()
     plt.plot(x, y[it,:], **plot_options)
 
@@ -413,7 +413,6 @@ def plot_2d(it, x, y, z, plot_options, options):
         Dictionary of options which control various program functions.
     """
 
-    print('\rSaving frame ', it, end='')
     plt.clf()
     ax = plt.subplot(111)
     im = ax.contourf(x, y, np.transpose(z[it,:,:]), **plot_options)
