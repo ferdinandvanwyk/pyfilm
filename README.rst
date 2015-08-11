@@ -118,7 +118,7 @@ Examples
     z = np.random.rand(10, 10, 10)
     pf.make_film_2d(x, y, z)
 
-1D Example wiht styling and options:
+1D Example with styling and options:
 
 .. code:: bash
 
