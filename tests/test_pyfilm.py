@@ -68,15 +68,15 @@ class TestClass(object):
     def test_1d_1_arg(self):
         y = np.random.rand(2,2)
         make_film_1d(y)
-        assert ('f_1d_00000.png' in os.listdir('films/film_frames/'))
-        assert ('f_1d.mp4' in os.listdir('films/'))
+        assert ('f_00000.png' in os.listdir('films/film_frames/'))
+        assert ('f.mp4' in os.listdir('films/'))
 
     def test_1d_2_arg(self):
         x = np.arange(2)
         y = np.random.rand(2,2)
         make_film_1d(x, y)
-        assert ('f_1d_00000.png' in os.listdir('films/film_frames/'))
-        assert ('f_1d.mp4' in os.listdir('films/'))
+        assert ('f_00000.png' in os.listdir('films/film_frames/'))
+        assert ('f.mp4' in os.listdir('films/'))
         
     def test_1d_argumets(self):
         x = np.arange(2)
@@ -87,7 +87,7 @@ class TestClass(object):
         x = np.arange(2)
         y = np.random.rand(2,2)
         make_film_1d(x, y)
-        im = Image.open('films/film_frames/f_1d_00000.png') 
+        im = Image.open('films/film_frames/f_00000.png') 
         w = im.size[0]
         h = im.size[1]
         assert (w%2 == 0 and h%2 == 0)
@@ -95,22 +95,22 @@ class TestClass(object):
     def test_2d_1_arg(self):
         z = np.random.rand(2,2,2)
         make_film_2d(z)
-        assert ('f_2d_00000.png' in os.listdir('films/film_frames/'))
-        assert ('f_2d.mp4' in os.listdir('films/'))
+        assert ('f_00000.png' in os.listdir('films/film_frames/'))
+        assert ('f.mp4' in os.listdir('films/'))
 
     def test_2d_1_arg_negative(self):
         z = np.array([[[-10,  -6], [  1,  -5]],[[  0,  -8],[ -1,  -3]]]) 
         make_film_2d(z)
-        assert ('f_2d_00000.png' in os.listdir('films/film_frames/'))
-        assert ('f_2d.mp4' in os.listdir('films/'))
+        assert ('f_00000.png' in os.listdir('films/film_frames/'))
+        assert ('f.mp4' in os.listdir('films/'))
 
     def test_2d_3_arg(self):
         x = np.random.rand(2)
         y = np.random.rand(2)
         z = np.random.rand(2,2,2)
         make_film_2d(x, y, z)
-        assert ('f_2d_00000.png' in os.listdir('films/film_frames/'))
-        assert ('f_2d.mp4' in os.listdir('films/'))
+        assert ('f_00000.png' in os.listdir('films/film_frames/'))
+        assert ('f.mp4' in os.listdir('films/'))
 
     def test_plot_2d(self):
         x = np.arange(2)

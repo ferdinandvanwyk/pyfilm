@@ -44,7 +44,7 @@ def make_film_1d(*args, **kwargs):
         options = set_user_options(options, kwargs['options'])
     except KeyError:
         pass
-    options['file_name'] = options['file_name'] + '_1d'
+
     try:
         plot_options = kwargs['plot_options']
     except KeyError:
@@ -104,7 +104,7 @@ def make_film_2d(* args, **kwargs):
         options = set_user_options(options, kwargs['options'])
     except KeyError:
         pass
-    options['file_name'] = options['file_name'] + '_2d'
+
     try:
         plot_options = kwargs['plot_options']
     except KeyError:
@@ -498,7 +498,7 @@ def make_plot_titles(nt, options):
     elif type(options['title']) == list:
         if nt != len(options['title']):
             raise ValueError('Dimension of time and length of plot titles '
-                             'different!')
+                     'different: {0}, {1}'.format(nt, len(options['title'])))
 
     return(options)
 

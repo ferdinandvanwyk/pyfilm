@@ -61,8 +61,7 @@ dpi              None            [None | int] DPI of saved images. Defaults to
                                  savefig.dpi value in matplotlibrc file.
 encoder          None            [None | 'ffmpeg' | 'avconv'] Specifies the 
                                  encoder to be used by pyfilm
-file_name        'f'             [str] Name of film frames and film. Appended 
-                                 with '1d' or '2d' and the frame number.
+file_name        'f'             [str] Name of film frames and film.
 film_dir         'films'         [str] Location where films are written
 film_frames      'films/         [str] Location where film frames are written
                  film_frames'
