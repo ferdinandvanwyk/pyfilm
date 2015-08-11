@@ -17,8 +17,7 @@ Getting Started
 Python version support
 ----------------------
 
-Currently *pyfilm* only support Python versions 3.x, however it is only tested
-with 3.4.
+*pyfilm* supports Python 2.x and 3.x, however it is only tested on 3.4 and 2.7. 
 
 System dependencies
 -------------------
@@ -65,6 +64,12 @@ Python dependencies
 * pillow_
 * py-cpuinfo_
 * clint_
+
+.. _numpy: http://www.numpy.org/
+.. _matplotlib: http://matplotlib.org/
+.. _pillow: https://python-pillow.github.io/
+.. _py-cpuinfo: https://github.com/workhorsy/py-cpuinfo
+.. _clint: https://github.com/kennethreitz/clint
 
 A complete list is found in the requirements.txt file and is installed by
 running:
