@@ -13,11 +13,12 @@ setup(
     keywords = ['film', 'animation', 'numpy', 'ffmpeg', 'avconv'],
     packages=['pyfilm'],
     url = 'https://github.com/ferdinandvwyk/pyfilm.git',
-    setup_requires =['numpy'],
+    setup_requires =['numpy>1.6'],
     install_requires =[
         'matplotlib>1.4',
         'py-cpuinfo>0.1',
         'Pillow>2.8',
+        'clint>0.4',
     ],
     classifiers=[
     "Development Status :: 3 - Alpha"

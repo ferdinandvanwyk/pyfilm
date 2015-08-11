@@ -58,7 +58,15 @@ before installing matplotlib.
 Python dependencies
 -------------------
 
-The dependencies are listed in the requirements.txt file and are installed by
+*pyfilm* requires:
+
+* numpy_
+* matplotlib_
+* pillow_
+* py-cpuinfo_
+* clint_
+
+A complete list is found in the requirements.txt file and is installed by
 running:
 
 .. code:: bash

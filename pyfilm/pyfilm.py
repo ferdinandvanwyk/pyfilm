@@ -8,7 +8,6 @@
 """
 
 import os
-import shutil
 import warnings
 
 import numpy as np
@@ -222,7 +221,7 @@ def set_up_dirs():
     """
     Checks for film directories and creates them if they don't exist.
     """
-    if 'films' not in os.listdir():
+    if 'films' not in os.listdir('.'):
         os.system("mkdir films")
     if 'film_frames' not in os.listdir('films'):
         os.system("mkdir films/film_frames")
@@ -287,19 +286,19 @@ def find_encoder(options):
         Dictionary of options which control various program functions.
     """
 
-    f = shutil.which('ffmpeg')
-    a = shutil.which('avconv')
+    f = os.system('which ffmpeg')
+    a = os.system('which avconv')
     
-    if a == None and f == None:
+    if a > 0 and f > 0:
         raise EnvironmentError('This system does not have FFMPEG or AVCONV '
                                'installed.')
-    elif a and f:
+    elif a == 0 and f == 0:
         warnings.warn('This system has both FFMPEG and AVCONV installed. '
                       'Defaulting to AVCONV.')
         options['encoder'] = 'avconv'
-    elif a and not f:
+    elif a == 0  and f > 0:
         options['encoder'] = 'avconv'
-    elif f and not a:
+    elif f == 0 and a > 0:
         options['encoder'] = 'ffmpeg'
 
     return(options)
