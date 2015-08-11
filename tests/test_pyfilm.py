@@ -40,7 +40,9 @@ class TestClass(object):
         assert options['xlabel'] == 'test'
 
     def test_set_up_dirs(self):
-        set_up_dirs()
+        options = {}
+        options = set_default_options(options)
+        set_up_dirs(options)
         assert os.path.exists('films') == True
         assert os.path.exists('films/film_frames') == True
 

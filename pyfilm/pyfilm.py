@@ -50,7 +50,7 @@ def make_film_1d(*args, **kwargs):
     except KeyError:
         plot_options = {}
 
-    set_up_dirs()
+    set_up_dirs(options)
 
     if options['encoder'] == None:
         options = find_encoder(options)
@@ -74,18 +74,9 @@ def make_film_1d(*args, **kwargs):
     if options['crop']:
         crop_images(nt, options)
 
-    if options['encoder'] == 'avconv':
-        os.system("avconv -threads " + str(options['threads']) + " -y -f "
-                  "image2 -r " + str(options['fps']) + " -i " + 
-                  "'films/film_frames/" + str(options['file_name']) + 
-                  "_%05d.png' -q 1 films/" + str(options['file_name']) + ".mp4")
-    elif options['encoder'] == 'ffmpeg':
-        os.system("ffmpeg -threads " + str(options['threads']) + " -y "
-                  "-r " + str(options['fps']) + " -i " + "'films/film_frames/" 
-                  + str(options['file_name']) + "_%05d.png' -pix_fmt yuv420p -c:v "
-                  "libx264 -q 1 films/" + str(options['file_name']) + ".mp4")
+    encode_images(options)
 
-def make_film_2d(*args, **kwargs):
+def make_film_2d(* args, **kwargs):
     """
     The main function which generates 2D films.
 
@@ -117,7 +108,7 @@ def make_film_2d(*args, **kwargs):
     except KeyError:
         plot_options = {}
 
-    set_up_dirs()
+    set_up_dirs(options)
 
     if options['encoder'] == None:
         options = find_encoder(options)
@@ -155,16 +146,7 @@ def make_film_2d(*args, **kwargs):
     if options['crop']:
         crop_images(nt, options)
 
-    if options['encoder'] == 'avconv':
-        os.system("avconv -threads " + str(options['threads']) + " -y -f "
-                  "image2 -r " + str(options['fps']) + " -i " + 
-                  "'films/film_frames/" + str(options['file_name']) + 
-                  "_%05d.png' -q 1 films/" + str(options['file_name']) + ".mp4")
-    elif options['encoder'] == 'ffmpeg':
-        os.system("ffmpeg -threads " + str(options['threads']) + " -y "
-                  "-r " + str(options['fps']) + " -i " + "'films/film_frames/" 
-                  + str(options['file_name']) + "_%05d.png' -pix_fmt yuv420p -c:v "
-                  "libx264 -q 1 films/" + str(options['file_name']) + ".mp4")
+    encode_images(options)
 
 def set_default_options(options):
     """
@@ -187,6 +169,8 @@ def set_default_options(options):
     options['encoder'] = None
     options['fps'] = 10
     options['file_name'] = 'f'
+    options['film_dir'] = 'films'
+    options['frame_dir'] = 'films/film_frames'
     options['crop'] = True
     options['cbar_label'] = 'f(x,y)'
     options['cbar_ticks'] = None
@@ -217,15 +201,20 @@ def set_user_options(options, user_options):
 
     return(options)
 
-def set_up_dirs():
+def set_up_dirs(options):
     """
     Checks for film directories and creates them if they don't exist.
+
+    Parameters
+    ----------
+    options : dict
+        Dictionary of options which control various program functions.
     """
-    if 'films' not in os.listdir('.'):
-        os.system("mkdir films")
-    if 'film_frames' not in os.listdir('films'):
-        os.system("mkdir films/film_frames")
-    os.system("rm -f films/film_frames/y_*.png")
+    if options['film_dir'] not in os.listdir('.'):
+        os.system("mkdir -p " + options['film_dir'])
+    if options['frame_dir'] not in os.listdir('.'):
+        os.system("mkdir -p " + options['frame_dir'])
+    os.system("rm -f " + options['frame_dir'] + "/y_*.png")
 
 def check_data_1d(x, y):
     """
@@ -385,8 +374,8 @@ def plot_1d(it, x, y, plot_options, options):
 
     plt.axes().set_aspect(options['aspect'])
 
-    plt.savefig('films/film_frames/{0}_{1:05d}.png'.format(
-                                    options['file_name'], it), dpi=options['dpi'])
+    plt.savefig(options['frame_dir'] + '/{0}_{1:05d}.png'.format(
+                                options['file_name'], it), dpi=options['dpi'])
 
 def plot_2d(it, x, y, z, plot_options, options):
     """
@@ -434,8 +423,8 @@ def plot_2d(it, x, y, z, plot_options, options):
                  ticks=options['cbar_ticks'], 
                  format=options['cbar_tick_format'])
 
-    plt.savefig('films/film_frames/{0}_{1:05d}.png'.format(
-                                    options['file_name'], it), dpi=options['dpi'])
+    plt.savefig(options['frame_dir'] + '/{0}_{1:05d}.png'.format(
+                                options['file_name'], it), dpi=options['dpi'])
 
 def crop_images(nt, options):
     """
@@ -454,15 +443,15 @@ def crop_images(nt, options):
 
     nt : int 
         Length of the time dimension.
-    options : dict, 
+    options : dict 
         Dictionary of options which control various program functions.
     """
 
     w = np.empty([nt], dtype=int)
     h = np.empty([nt], dtype=int)
     for it in range(nt):
-        im = Image.open('films/film_frames/{0}_{1:05d}.png'.format(
-                                                        options['file_name'], it))
+        im = Image.open(options['frame_dir'] + '/{0}_{1:05d}.png'.format(
+                                                    options['file_name'], it))
         w[it] = im.size[0]
         h[it] = im.size[1]
 
@@ -471,8 +460,32 @@ def crop_images(nt, options):
     new_w = int(w_min/2)*2
     new_h = int(h_min/2)*2
     for it in range(nt):
-        im = Image.open('films/film_frames/{0}_{1:05d}.png'.format(
-                                                        options['file_name'], it))
+        im = Image.open(options['frame_dir'] + '/{0}_{1:05d}.png'.format(
+                                                    options['file_name'], it))
         im_crop = im.crop((0, 0, new_w, new_h))
-        im_crop.save('films/film_frames/{0}_{1:05d}.png'.format(
-                                                        options['file_name'], it))
+        im_crop.save(options['frame_dir'] + '/{0}_{1:05d}.png'.format(
+                                                     options['file_name'], it))
+
+def encode_images(options):
+    """
+    Encode PNG images into a film.
+
+    Parameters
+    ----------
+
+    options : dict
+        Dictionary of options which control various program functions.
+    """
+
+    if options['encoder'] == 'avconv':
+        os.system("avconv -threads " + str(options['threads']) + " -y -f "
+                  "image2 -r " + str(options['fps']) + " -i " + 
+                  "'" + options['frame_dir'] + '/' + str(options['file_name']) + 
+                  "_%05d.png' -q 1 " + options['film_dir'] + "/" + 
+                  str(options['file_name']) + ".mp4")
+    elif options['encoder'] == 'ffmpeg':
+        os.system("ffmpeg -threads " + str(options['threads']) + " -y "
+                  "-r " + str(options['fps']) + " -i " + "'" + options['frame_dir'] + '/' 
+                  + str(options['file_name']) + "_%05d.png' -pix_fmt yuv420p -c:v "
+                  "libx264 -q 1 " + options['film_dir'] + "/" + str(options['file_name']) + ".mp4")
+
