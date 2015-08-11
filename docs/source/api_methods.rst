@@ -48,6 +48,10 @@ Option           Default [#f1]_  Value Type
 ================ =============== ==============================================
 aspect           'auto'          ['auto' | 'equal' | float] Set plot aspect 
                                  ratio.
+bbox_inches      None            [None | 'tight' | float] Bbox in inches. Only 
+                                 the given portion of the figure is saved. If 
+                                 ‘tight’, try to figure out the tight bbox of 
+                                 the figure.
 cbar_label       'z'             [str] Label of the contour plot color bar
 cbar_ticks       None            [None | int | np.ndarray] Set the color bar ticks
 cbar_tick_format '%.2f'          [str] Print format of the color bar ticks

@@ -182,6 +182,7 @@ def set_default_options(options):
     options['cbar_tick_format'] = '%.2f'
     options['threads'] = cpuinfo.get_cpu_info()['count']
     options['dpi'] = None
+    options['bbox_inches'] = None
 
     return(options)
 
@@ -379,7 +380,9 @@ def plot_1d(it, x, y, plot_options, options):
     plt.axes().set_aspect(options['aspect'])
 
     plt.savefig(options['frame_dir'] + '/{0}_{1:05d}.png'.format(
-                                options['file_name'], it), dpi=options['dpi'])
+                                options['file_name'], it), 
+                                dpi=options['dpi'],
+                                bbox_inches=options['bbox_inches'])
 
 def plot_2d(it, x, y, z, plot_options, options):
     """
@@ -429,7 +432,9 @@ def plot_2d(it, x, y, z, plot_options, options):
                  format=options['cbar_tick_format'])
 
     plt.savefig(options['frame_dir'] + '/{0}_{1:05d}.png'.format(
-                                options['file_name'], it), dpi=options['dpi'])
+                                options['file_name'], it), 
+                                dpi=options['dpi'],
+                                bbox_inches=options['bbox_inches'])
 
 def crop_images(nt, options):
     """

@@ -62,6 +62,7 @@ class TestClass(object):
         os.system('rm films/film_frames/*.png')
         options = {}
         options = set_default_options(options)
+        make_plot_titles(2, options)
         plot_1d(0, x, y, plot_options={}, options=options)
 
     def test_1d_1_arg(self):
@@ -118,6 +119,7 @@ class TestClass(object):
         os.system('rm films/film_frames/*.png')
         options = {}
         options = set_default_options(options)
+        make_plot_titles(2, options)
         plot_2d(0, x, y, z, plot_options={}, options=options)
 
     def test_check_data_2d(self):
