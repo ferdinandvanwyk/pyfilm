@@ -51,6 +51,7 @@ aspect           'auto'          ['auto' | 'equal' | float] Set plot aspect
 cbar_label       'z'             [str] Label of the contour plot color bar
 cbar_ticks       None            [None | int | np.ndarray] Set the color bar ticks
 cbar_tick_format '%.2f'          [str] Print format of the color bar ticks
+contours         7               [int] Number of contour levels
 crop             True            [True | False] Crops images before encoding
 dpi              None            [None | int] DPI of saved images. Defaults to
                                  savefig.dpi value in matplotlibrc file.

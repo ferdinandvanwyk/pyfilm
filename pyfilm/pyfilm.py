@@ -174,7 +174,7 @@ def set_default_options(options):
     options['crop'] = True
     options['cbar_label'] = 'f(x,y)'
     options['cbar_ticks'] = None
-    options['contours'] = None
+    options['contours'] = 7
     options['cbar_tick_format'] = '%.2f'
     options['threads'] = cpuinfo.get_cpu_info()['count']
     options['dpi'] = None
@@ -403,7 +403,8 @@ def plot_2d(it, x, y, z, plot_options, options):
 
     plt.clf()
     ax = plt.subplot(111)
-    im = ax.contourf(x, y, np.transpose(z[it,:,:]), **plot_options)
+    im = ax.contourf(x, y, np.transpose(z[it,:,:]), options['contours'], 
+                     **plot_options)
 
     plt.title(options['title'])
     plt.xlabel(options['xlabel'])
