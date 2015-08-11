@@ -20,6 +20,7 @@ class TestClass(object):
         options = set_default_options(options)
         assert options['xlabel'] == 'x'
         assert options['ylabel'] == 'y'
+        assert options['title'] == ''
         assert options['xlim'] == None
         assert options['ylim'] == None
         assert options['grid'] == False
@@ -133,4 +134,13 @@ class TestClass(object):
         z = np.random.rand(2,2,2)
         pytest.raises(ValueError, "make_film_2d(x, z)")
         pytest.raises(ValueError, "make_film_2d(x, y, y, z)")
-        
+
+    def test_make_plot_titles(self):
+        options = {}
+        options = set_default_options(options)
+        options = make_plot_titles(10, options)
+        assert len(options['title']) == 10
+
+        options['title'] = ['test']*9
+
+        pytest.raises(ValueError, "make_plot_titles(10, options)")

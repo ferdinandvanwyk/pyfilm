@@ -64,7 +64,9 @@ film_frames      'films/         [str] Location where film frames are written
                  film_frames'
 fps              10              [int] Frames per second of the film                      
 grid             True            [True | False] Controls plotting of gridlines
-title            ''              [str] Specify title
+title            ''              [str | list] Specify title as string or array
+                                 of strings of length of time domain which is
+                                 iterated through
 threads          None            [None | int] Set max number of threads to use
 xlabel           'x'             [str] Specify xlabel. May include LaTeX. 
 xlim             None            [None | array] Set x-axis limits

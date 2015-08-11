@@ -68,6 +68,8 @@ def make_film_1d(*args, **kwargs):
     else:
         raise ValueError('This function only takes in max. 2 arguments.')
 
+    options = make_plot_titles(nt, options)
+
     for it in progress.bar(range(nt)):
         plot_1d(it, x, y, plot_options, options)
 
@@ -139,6 +141,8 @@ def make_film_2d(* args, **kwargs):
         pass
     elif type(options['cbar_ticks']) == int or options['cbar_ticks'] == None:
         options = calculate_cbar_ticks(z, options)
+
+    options = make_plot_titles(nt, options)
 
     for it in progress.bar(range(nt)):
         plot_2d(it, x, y, z, plot_options, options)
@@ -363,7 +367,7 @@ def plot_1d(it, x, y, plot_options, options):
     plt.clf()
     plt.plot(x, y[it,:], **plot_options)
 
-    plt.title(options['title'])
+    plt.title(options['title'][it])
     plt.xlabel(options['xlabel'])
     plt.ylabel(options['ylabel'])
 
@@ -406,7 +410,7 @@ def plot_2d(it, x, y, z, plot_options, options):
     im = ax.contourf(x, y, np.transpose(z[it,:,:]), options['contours'], 
                      **plot_options)
 
-    plt.title(options['title'])
+    plt.title(options['title'][it])
     plt.xlabel(options['xlabel'])
     plt.ylabel(options['ylabel'])
 
@@ -466,6 +470,32 @@ def crop_images(nt, options):
         im_crop = im.crop((0, 0, new_w, new_h))
         im_crop.save(options['frame_dir'] + '/{0}_{1:05d}.png'.format(
                                                      options['file_name'], it))
+
+def make_plot_titles(nt, options):
+    """
+    Creates the array of plot titles passed to the plotting function.
+
+    This function allows dynamic plot titles such as the frame number or time.
+    When the user has just passed in a fixed string, this is repeated to be the
+    same length as the time dimension.
+
+    Parameters
+    ----------
+
+    nt : int 
+        Length of the time dimension.
+    options : dict 
+        Dictionary of options which control various program functions.
+    """
+
+    if type(options['title']) == str:
+        options['title'] = [options['title']]*nt
+    elif type(options['title']) == list:
+        if nt != len(options['title']):
+            raise ValueError('Dimension of time and length of plot titles '
+                             'different!')
+
+    return(options)
 
 def encode_images(options):
     """
