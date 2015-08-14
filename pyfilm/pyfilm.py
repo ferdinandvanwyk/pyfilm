@@ -219,7 +219,8 @@ def set_up_dirs(options):
         os.system("mkdir -p " + options['film_dir'])
     if options['frame_dir'] not in os.listdir('.'):
         os.system("mkdir -p " + options['frame_dir'])
-    os.system("rm -f " + options['frame_dir'] + "/y_*.png")
+    os.system("rm -f " + options['frame_dir'] + "/" + options['file_name'] + 
+              "_*.png")
 
 def check_data_1d(x, y):
     """
