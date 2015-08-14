@@ -4,6 +4,7 @@ import pytest
 import numpy as np
 from PIL import Image
 import matplotlib
+import warnings
 matplotlib.use('Agg') # specifically for Travis CI to avoid backend errors
 
 from pyfilm.pyfilm import *
@@ -137,12 +138,14 @@ class TestClass(object):
         pytest.raises(ValueError, "make_film_2d(x, z)")
         pytest.raises(ValueError, "make_film_2d(x, y, y, z)")
 
-    def test_make_plot_titles(self):
+    def test_make_plot_titles(self, recwarn):
         options = {}
         options = set_default_options(options)
         options = make_plot_titles(10, options)
         assert len(options['title']) == 10
 
         options['title'] = ['test']*9
-
-        pytest.raises(ValueError, "make_plot_titles(10, options)")
+        
+        make_plot_titles(10, options)
+        w = recwarn.pop(UserWarning)
+        assert issubclass(w.category, UserWarning)
