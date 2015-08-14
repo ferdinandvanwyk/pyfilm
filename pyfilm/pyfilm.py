@@ -498,8 +498,8 @@ def make_plot_titles(nt, options):
         options['title'] = [options['title']]*nt
     elif type(options['title']) == list:
         if nt != len(options['title']):
-            raise ValueError('Dimension of time and length of plot titles '
-                     'different: {0}, {1}'.format(nt, len(options['title'])))
+            warnings.warn('Dimension of time and length of plot titles '
+                      'different: {0}, {1}'.format(nt, len(options['title'])))
 
     return(options)
 
