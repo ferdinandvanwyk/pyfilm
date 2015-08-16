@@ -70,7 +70,8 @@ grid             True            [True | False] Controls plotting of gridlines
 title            ''              [str | list] Specify title as string or array
                                  of strings of length of time domain which is
                                  iterated through
-threads          None            [None | int] Set max number of threads to use
+nprocs           None            [None | int] Set max number of cpu cores to 
+                                 use. Defaults to `os.cpu_count()`
 xlabel           'x'             [str] Specify xlabel. May include LaTeX. 
 xlim             None            [None | array] Set x-axis limits
 ylabel           'y'             [str] Specify ylabel. May include LaTeX. 

@@ -12,7 +12,6 @@ numpydoc==0.5
 pandas==0.16.2
 Pillow==2.9.0
 py==1.4.30
-py-cpuinfo==0.1.6
 Pygments==2.0.2
 pyparsing==2.0.3
 pytest==2.7.2

@@ -15,6 +15,7 @@ class TestClass(object):
     """
     def teardown_class(self):
         os.system('rm -rf films')
+        os.system('rm -rf __pycache__')
 
     def test_set_default_options(self):
         options = {}
@@ -32,7 +33,7 @@ class TestClass(object):
         assert options['file_name'] == 'f'
         assert options['crop'] == True
         assert options['cbar_label'] == 'f(x,y)'
-        assert type(options['threads']) == int
+        assert type(options['nprocs']) == int
 
     def test_set_user_options(self):
         options = {}
@@ -63,8 +64,10 @@ class TestClass(object):
         os.system('rm films/film_frames/*.png')
         options = {}
         options = set_default_options(options)
+        set_up_dirs(options)
         make_plot_titles(2, options)
-        plot_1d(0, x, y, plot_options={}, options=options)
+        args = (0, x, y[0,:], {}, options)
+        plot_1d(args)
 
     def test_1d_1_arg(self):
         y = np.random.rand(2,2)

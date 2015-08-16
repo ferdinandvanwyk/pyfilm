@@ -9,9 +9,9 @@
 
 import os
 import warnings
+import multiprocessing as mp
 
 import numpy as np
-from cpuinfo import cpuinfo
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 from PIL import Image
@@ -70,8 +70,11 @@ def make_film_1d(*args, **kwargs):
 
     options = make_plot_titles(nt, options)
 
-    for it in progress.bar(range(nt)):
-        plot_1d(it, x, y, plot_options, options)
+    pool = mp.Pool(processes=options['nprocs'])
+    params = zip(range(nt), [x]*nt, y, [plot_options]*nt, [options]*nt)
+    pool.map(plot_1d, params)
+    pool.close()
+    pool.join()
 
     if options['crop']:
         crop_images(nt, options)
@@ -180,7 +183,7 @@ def set_default_options(options):
     options['cbar_ticks'] = None
     options['contours'] = 7
     options['cbar_tick_format'] = '%.2f'
-    options['threads'] = cpuinfo.get_cpu_info()['count']
+    options['nprocs'] = os.cpu_count()
     options['dpi'] = None
     options['bbox_inches'] = None
 
@@ -344,7 +347,7 @@ def calculate_cbar_ticks(z, options):
 
     return(options)
 
-def plot_1d(it, x, y, plot_options, options):
+def plot_1d(args):
     """
     Plot the 1D graph for a given time step.
 
@@ -365,9 +368,11 @@ def plot_1d(it, x, y, plot_options, options):
     options : dict 
         Dictionary of options which control various program functions.
     """
+    
+    it, x, y, plot_options, options = args
 
-    plt.clf()
-    plt.plot(x, y[it,:], **plot_options)
+    fig = plt.figure()
+    plt.plot(x, y, **plot_options)
 
     plt.title(options['title'][it])
     plt.xlabel(options['xlabel'])
@@ -384,6 +389,7 @@ def plot_1d(it, x, y, plot_options, options):
                                 options['file_name'], it), 
                                 dpi=options['dpi'],
                                 bbox_inches=options['bbox_inches'])
+    plt.close(fig)
 
 def plot_2d(it, x, y, z, plot_options, options):
     """
@@ -515,13 +521,13 @@ def encode_images(options):
     """
 
     if options['encoder'] == 'avconv':
-        os.system("avconv -threads " + str(options['threads']) + " -y -f "
+        os.system("avconv -threads " + str(options['nprocs']) + " -y -f "
                   "image2 -r " + str(options['fps']) + " -i " + 
                   "'" + options['frame_dir'] + '/' + str(options['file_name']) + 
                   "_%05d.png' -q 1 " + options['film_dir'] + "/" + 
                   str(options['file_name']) + ".mp4")
     elif options['encoder'] == 'ffmpeg':
-        os.system("ffmpeg -threads " + str(options['threads']) + " -y "
+        os.system("ffmpeg -threads " + str(options['nprocs']) + " -y "
                   "-r " + str(options['fps']) + " -i " + "'" + options['frame_dir'] + '/' 
                   + str(options['file_name']) + "_%05d.png' -pix_fmt yuv420p -c:v "
                   "libx264 -q 1 " + options['film_dir'] + "/" + str(options['file_name']) + ".mp4")

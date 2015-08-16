@@ -62,13 +62,11 @@ Python dependencies
 * numpy_
 * matplotlib_
 * pillow_
-* py-cpuinfo_
 * clint_
 
 .. _numpy: http://www.numpy.org/
 .. _matplotlib: http://matplotlib.org/
 .. _pillow: https://python-pillow.github.io/
-.. _py-cpuinfo: https://github.com/workhorsy/py-cpuinfo
 .. _clint: https://github.com/kennethreitz/clint
 
 A complete list is found in the requirements.txt file and is installed by
