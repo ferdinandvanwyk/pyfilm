@@ -28,7 +28,7 @@ install:
     - conda install --yes python=$TRAVIS_PYTHON_VERSION pip numpy matplotlib Pillow
     - pip install pytest  # not yet available for py3 in anaconda 
     - pip install pytest-cov coverage coveralls
-    - pip install py-cpuinfo clint
+    - pip install py-cpuinfo
     - python setup.py install
 # command to run tests
 script: 

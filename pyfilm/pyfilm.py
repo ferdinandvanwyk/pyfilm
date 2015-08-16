@@ -1,10 +1,9 @@
-"""                                                                             
-.. module:: pyfilm 
-   :platform: Unix, OSX                                                         
+"""
+.. module:: pyfilm
+   :platform: Unix, OSX
    :synopsis: Main pyfilm functions.
 
-.. moduleauthor:: Ferdinand van Wyk <ferdinandvwyk@gmail.com>                   
-                                                                                
+.. moduleauthor:: Ferdinand van Wyk <ferdinandvwyk@gmail.com>
 """
 
 import os
@@ -17,6 +16,7 @@ import matplotlib.pyplot as plt
 from PIL import Image
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from cpuinfo import cpuinfo
+
 
 def make_film_1d(*args, **kwargs):
     """
@@ -31,8 +31,8 @@ def make_film_1d(*args, **kwargs):
         Two dimensional array assumed to be of the form y(t, x). This specifies
         the values to be plotted as a function of time.
     plot_options : dict, optional
-        Dictionary of plot customizations which are evaluated for each plot, 
-        e.g. when plot is called it will be called as 
+        Dictionary of plot customizations which are evaluated for each plot,
+        e.g. when plot is called it will be called as
         plt.plot(x, y, **plot_options)
     options : dict, optional
         Dictionary of options which control various program functions.
@@ -81,6 +81,7 @@ def make_film_1d(*args, **kwargs):
 
     encode_images(options)
 
+
 def make_film_2d(* args, **kwargs):
     """
     The main function which generates 2D films.
@@ -92,11 +93,11 @@ def make_film_2d(* args, **kwargs):
     y : array_like, optional
         Array specifying the y axis.
     z : array_like
-        Three dimensional array assumed to be of the form z(t, x, y). This 
+        Three dimensional array assumed to be of the form z(t, x, y). This
         specifies the values to be plotted as a function of time.
     plot_options : dict, optional
-        Dictionary of plot customizations which are evaluated for each plot, 
-        e.g. when plot is called it will be called as 
+        Dictionary of plot customizations which are evaluated for each plot,
+        e.g. when plot is called it will be called as
         plt.plot(x, y, **plot_options)
     options : dict, optional
         Dictionary of options which control various program functions.
@@ -120,7 +121,7 @@ def make_film_2d(* args, **kwargs):
 
     if len(args) == 1:
         z = np.array(args[0])
-        
+
         nt = z.shape[0]
         nx = z.shape[1]
         ny = z.shape[2]
@@ -133,8 +134,8 @@ def make_film_2d(* args, **kwargs):
         x = np.array(args[0])
         y = np.array(args[1])
         z = np.array(args[2])
-        
-        check_data_2d(x,y,z)
+
+        check_data_2d(x, y, z)
 
         nt = z.shape[0]
     else:
@@ -153,11 +154,11 @@ def make_film_2d(* args, **kwargs):
     pool.close()
     pool.join()
 
-    
     if options['crop']:
         crop_images(nt, options)
 
     encode_images(options)
+
 
 def set_default_options(options):
     """
@@ -193,11 +194,12 @@ def set_default_options(options):
 
     return(options)
 
+
 def set_user_options(options, user_options):
     """
     Replace default options with user specified ones.
 
-    An exhastive list of the available options is given in a table in the 
+    An exhastive list of the available options is given in a table in the
     documentation.
 
     Parameters
@@ -205,13 +207,14 @@ def set_user_options(options, user_options):
 
     options : dict
         Dictionary of options which control various program functions.
-    user_options : dict 
+    user_options : dict
         Dictionary of options passed in by the user as a keyword argument.
     """
     for key, value in user_options.items():
         options[key] = value
 
     return(options)
+
 
 def set_up_dirs(options):
     """
@@ -226,8 +229,9 @@ def set_up_dirs(options):
         os.system("mkdir -p " + options['film_dir'])
     if options['frame_dir'] not in os.listdir('.'):
         os.system("mkdir -p " + options['frame_dir'])
-    os.system("rm -f " + options['frame_dir'] + "/" + options['file_name'] + 
+    os.system("rm -f " + options['frame_dir'] + "/" + options['file_name'] +
               "_*.png")
+
 
 def check_data_1d(x, y):
     """
@@ -239,23 +243,24 @@ def check_data_1d(x, y):
     Parameters
     ----------
 
-    x : array_like, 
+    x : array_like,
         Array specifying the x axis.
     y : array_like
         Two dimensional array assumed to be of the form y(t, x). This specifies
         the values to be plotted as a function of time.
     """
-    x_s = x.shape 
-    y_s = y.shape 
+    x_s = x.shape
+    y_s = y.shape
     if x_s[0] != y_s[1]:
         raise ValueError('x and y must have the same length: '
                          '{0}, {1}'.format(x_s[0], y_s[1]))
+
 
 def check_data_2d(x, y, z):
     """
     Performs consistency checks on the data passed into make_film_2d.
 
-    These checks are only done when both x, y, and z arguments are passed into 
+    These checks are only done when both x, y, and z arguments are passed into
     the function.
 
     Parameters
@@ -265,12 +270,12 @@ def check_data_2d(x, y, z):
     y : array_like
         Array specifying the y axis.
     z : array_like
-        Three dimensional array assumed to be of the form z(t, x, y). This 
+        Three dimensional array assumed to be of the form z(t, x, y). This
         specifies the values to be plotted as a function of time.
     """
-    x_s = x.shape 
-    y_s = y.shape 
-    z_s = z.shape 
+    x_s = x.shape
+    y_s = y.shape
+    z_s = z.shape
     if x_s[0] != z_s[1]:
         raise ValueError('x and z must have the same length: '
                          '{0}, {1}'.format(x_s[0], z_s[1]))
@@ -278,19 +283,20 @@ def check_data_2d(x, y, z):
         raise ValueError('y and z must have the same length: '
                          '{0}, {1}'.format(y_s[0], z_s[2]))
 
+
 def find_encoder(options):
     """
     Determines which encoder the user has on their system.
 
     Parameters
     ----------
-    options : dict, 
+    options : dict,
         Dictionary of options which control various program functions.
     """
 
     f = os.system('which ffmpeg')
     a = os.system('which avconv')
-    
+
     if a > 0 and f > 0:
         raise EnvironmentError('This system does not have FFMPEG or AVCONV '
                                'installed.')
@@ -298,12 +304,13 @@ def find_encoder(options):
         warnings.warn('This system has both FFMPEG and AVCONV installed. '
                       'Defaulting to AVCONV.')
         options['encoder'] = 'avconv'
-    elif a == 0  and f > 0:
+    elif a == 0 and f > 0:
         options['encoder'] = 'avconv'
     elif f == 0 and a > 0:
         options['encoder'] = 'ffmpeg'
 
     return(options)
+
 
 def calculate_cbar_ticks(z, options):
     """
@@ -312,7 +319,7 @@ def calculate_cbar_ticks(z, options):
     There are three options for options['cbar_ticks']:
 
     * None: Automatically determine the extrama and set 5 ticks.
-    * int: Automatically determine the extrama and set specified number of 
+    * int: Automatically determine the extrama and set specified number of
       ticks.
     * array: Set cbar_ticks to user specified values.
 
@@ -321,7 +328,7 @@ def calculate_cbar_ticks(z, options):
 
     z : array_like
         The 3D array being plotted: z(x, y).
-    options : dict 
+    options : dict
         Dictionary of options which control various program functions.
     """
 
@@ -331,25 +338,26 @@ def calculate_cbar_ticks(z, options):
         if options['cbar_ticks'] == None:
             if np.abs(z_max) > np.abs(z_min):
                 options['cbar_ticks'] = np.around(
-                                               np.linspace(-z_max, z_max, 5),7)
+                                           np.linspace(-z_max, z_max, 5), 7)
             else:
                 options['cbar_ticks'] = np.around(
-                                               np.linspace(z_min, -z_min, 5),7)
+                                           np.linspace(z_min, -z_min, 5), 7)
         else:
             if np.abs(z_max) > np.abs(z_min):
-                options['cbar_ticks'] = np.around(np.linspace(-z_max, z_max, 
-                                                      options['cbar_ticks']),7)
+                options['cbar_ticks'] = np.around(np.linspace(-z_max, z_max,
+                                                  options['cbar_ticks']), 7)
             else:
-                options['cbar_ticks'] = np.around(np.linspace(z_min, -z_min, 
-                                                      options['cbar_ticks']),7)
+                options['cbar_ticks'] = np.around(np.linspace(z_min, -z_min,
+                                                  options['cbar_ticks']), 7)
     elif z_min*z_max >= 0:
         if options['cbar_ticks'] == None:
-            options['cbar_ticks'] = np.around(np.linspace(z_min, z_max, 5),7)
+            options['cbar_ticks'] = np.around(np.linspace(z_min, z_max, 5), 7)
         else:
-            options['cbar_ticks'] = np.around(np.linspace(z_min, z_max, 
-                                                      options['cbar_ticks']),7)
+            options['cbar_ticks'] = np.around(np.linspace(z_min, z_max,
+                                              options['cbar_ticks']), 7)
 
     return(options)
+
 
 def plot_1d(args):
     """
@@ -360,19 +368,19 @@ def plot_1d(args):
 
     it : int
         Time index being plotted.
-    x : array_like 
+    x : array_like
         Array specifying the x axis.
     y : array_like
         Two dimensional array assumed to be of the form y(t, x). This specifies
         the values to be plotted as a function of time.
     plot_options : dict
-        Dictionary of plot customizations which are evaluated for each plot, 
-        e.g. when plot is called it will be called as 
+        Dictionary of plot customizations which are evaluated for each plot,
+        e.g. when plot is called it will be called as
         plt.plot(x, y, **plot_options)
-    options : dict 
+    options : dict
         Dictionary of options which control various program functions.
     """
-    
+
     it, x, y, plot_options, options = args
 
     fig = plt.figure()
@@ -390,10 +398,11 @@ def plot_1d(args):
     plt.axes().set_aspect(options['aspect'])
 
     plt.savefig(options['frame_dir'] + '/{0}_{1:05d}.png'.format(
-                                options['file_name'], it), 
-                                dpi=options['dpi'],
-                                bbox_inches=options['bbox_inches'])
+                options['file_name'], it),
+                dpi=options['dpi'],
+                bbox_inches=options['bbox_inches'])
     plt.close(fig)
+
 
 def plot_2d(args):
     """
@@ -409,13 +418,13 @@ def plot_2d(args):
     y : array_like
         Array specifying the y axis.
     z : array_like
-        Three dimensional array assumed to be of the form z(t, x, y). This 
+        Three dimensional array assumed to be of the form z(t, x, y). This
         specifies the values to be plotted as a function of time.
     plot_options : dict
-        Dictionary of plot customizations which are evaluated for each plot, 
-        e.g. when plot is called it will be called as 
+        Dictionary of plot customizations which are evaluated for each plot,
+        e.g. when plot is called it will be called as
         plt.plot(x, y, **plot_options)
-    options : dict 
+    options : dict
         Dictionary of options which control various program functions.
     """
 
@@ -423,7 +432,7 @@ def plot_2d(args):
 
     plt.clf()
     ax = plt.subplot(111)
-    im = ax.contourf(x, y, np.transpose(z), options['contours'], 
+    im = ax.contourf(x, y, np.transpose(z), options['contours'],
                      **plot_options)
 
     plt.title(options['title'][it])
@@ -440,33 +449,34 @@ def plot_2d(args):
     divider = make_axes_locatable(ax)
     cax = divider.append_axes("right", size="5%", pad=0.05)
 
-    plt.colorbar(im, cax=cax, label=options['cbar_label'], 
-                 ticks=options['cbar_ticks'], 
+    plt.colorbar(im, cax=cax, label=options['cbar_label'],
+                 ticks=options['cbar_ticks'],
                  format=options['cbar_tick_format'])
 
     plt.savefig(options['frame_dir'] + '/{0}_{1:05d}.png'.format(
-                                options['file_name'], it), 
-                                dpi=options['dpi'],
-                                bbox_inches=options['bbox_inches'])
+                options['file_name'], it),
+                dpi=options['dpi'],
+                bbox_inches=options['bbox_inches'])
+
 
 def crop_images(nt, options):
     """
-    Ensures that PNG files have height and width that are even. 
-    
-    This owes to a quirk of avconv and libx264 that requires this. At the 
-    moment there is no easy way to specifically set the pixel count using 
-    Matplotlib and this is not desirable anyway since plots can be almost 
-    any size and aspect ratio depending on the data. The other solution 
+    Ensures that PNG files have height and width that are even.
+
+    This owes to a quirk of avconv and libx264 that requires this. At the
+    moment there is no easy way to specifically set the pixel count using
+    Matplotlib and this is not desirable anyway since plots can be almost
+    any size and aspect ratio depending on the data. The other solution
     found online is to use the `-vf` flag for avconv to control the output
-    size but this does not seem to work. The most reliable solution 
+    size but this does not seem to work. The most reliable solution
     therefore is to use Pillow to load and crop images.
 
     Parameters
     ----------
 
-    nt : int 
+    nt : int
         Length of the time dimension.
-    options : dict 
+    options : dict
         Dictionary of options which control various program functions.
     """
 
@@ -489,6 +499,7 @@ def crop_images(nt, options):
         im_crop.save(options['frame_dir'] + '/{0}_{1:05d}.png'.format(
                                                      options['file_name'], it))
 
+
 def make_plot_titles(nt, options):
     """
     Creates the array of plot titles passed to the plotting function.
@@ -500,9 +511,9 @@ def make_plot_titles(nt, options):
     Parameters
     ----------
 
-    nt : int 
+    nt : int
         Length of the time dimension.
-    options : dict 
+    options : dict
         Dictionary of options which control various program functions.
     """
 
@@ -511,9 +522,11 @@ def make_plot_titles(nt, options):
     elif type(options['title']) == list:
         if nt != len(options['title']):
             warnings.warn('Dimension of time and length of plot titles '
-                      'different: {0}, {1}'.format(nt, len(options['title'])))
+                          'different: {0}, {1}'.format(nt,
+                                                       len(options['title'])))
 
     return(options)
+
 
 def encode_images(options):
     """
@@ -528,13 +541,15 @@ def encode_images(options):
 
     if options['encoder'] == 'avconv':
         os.system("avconv -threads " + str(options['nprocs']) + " -y -f "
-                  "image2 -r " + str(options['fps']) + " -i " + 
-                  "'" + options['frame_dir'] + '/' + str(options['file_name']) + 
-                  "_%05d.png' -q 1 " + options['film_dir'] + "/" + 
-                  str(options['file_name']) + ".mp4")
+                  "image2 -r " + str(options['fps']) + " -i " +
+                  "'" + options['frame_dir'] + '/' +
+                  str(options['file_name']) + "_%05d.png' -q 1 " +
+                  options['film_dir'] + "/" + str(options['file_name']) +
+                  ".mp4")
     elif options['encoder'] == 'ffmpeg':
         os.system("ffmpeg -threads " + str(options['nprocs']) + " -y "
-                  "-r " + str(options['fps']) + " -i " + "'" + options['frame_dir'] + '/' 
-                  + str(options['file_name']) + "_%05d.png' -pix_fmt yuv420p -c:v "
-                  "libx264 -q 1 " + options['film_dir'] + "/" + str(options['file_name']) + ".mp4")
-
+                  "-r " + str(options['fps']) + " -i " + "'" +
+                  options['frame_dir'] + '/' + str(options['file_name']) +
+                  "_%05d.png' -pix_fmt yuv420p -c:v libx264 -q 1 " +
+                  options['film_dir'] + "/" + str(options['file_name']) +
+                  ".mp4")
