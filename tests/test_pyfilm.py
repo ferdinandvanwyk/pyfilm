@@ -123,8 +123,10 @@ class TestClass(object):
         os.system('rm films/film_frames/*.png')
         options = {}
         options = set_default_options(options)
+        set_up_dirs(options)
         make_plot_titles(2, options)
-        plot_2d(0, x, y, z, plot_options={}, options=options)
+        args = (0, x, y, z[0,:,:], {}, options)
+        plot_2d(args)
 
     def test_check_data_2d(self):
         x = np.arange(5)

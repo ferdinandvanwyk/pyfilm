@@ -61,7 +61,7 @@ dpi              None            [None | int] DPI of saved images. Defaults to
                                  savefig.dpi value in matplotlibrc file.
 encoder          None            [None | 'ffmpeg' | 'avconv'] Specifies the 
                                  encoder to be used by pyfilm
-file_name        'f'             [str] Name of film frames and film.
+file_name        'f'             [str] Name of film frames and film
 film_dir         'films'         [str] Location where films are written
 film_frames      'films/         [str] Location where film frames are written
                  film_frames'
@@ -71,10 +71,11 @@ title            ''              [str | list] Specify title as string or array
                                  of strings of length of time domain which is
                                  iterated through
 nprocs           None            [None | int] Set max number of cpu cores to 
-                                 use. Defaults to `os.cpu_count()`
-xlabel           'x'             [str] Specify xlabel. May include LaTeX. 
+                                 use. Defaults to max number of cores on 
+                                 machine
+xlabel           'x'             [str] Specify xlabel. May include LaTeX 
 xlim             None            [None | array] Set x-axis limits
-ylabel           'y'             [str] Specify ylabel. May include LaTeX. 
+ylabel           'y'             [str] Specify ylabel. May include LaTeX 
 ylim             None            [None | array] Set y-axis limits
 ================ =============== ============================================== 
 
@@ -82,10 +83,15 @@ ylim             None            [None | array] Set y-axis limits
 
 .. [#f1] None implies that the value is automatically determined.
 
-Performance considerations
---------------------------
+Multiprocessing and performance considerations
+----------------------------------------------
 
-Adding too many plot options may affect the run time and limit the usefulness 
-of the API. If things are running too slowly consider moving some options to
-your Matplotlib rcParams to set plot defaults.
+As of version 0.2.0, *pyfilm* includes support for multiprocessing mainly for 
+parallel saving of film frames. The number of cores dedicated to both saving of
+film frames and encoding using ffmpeg/avconv is controlled via the `nprocs`
+option.
+
+Even with multiprocessing support, adding too many plot options may affect the 
+run time and limit the usefulness of the API. If things are running too slowly 
+consider moving some options to your Matplotlib rcParams to set plot defaults.
 

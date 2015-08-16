@@ -16,7 +16,7 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 from PIL import Image
 from mpl_toolkits.axes_grid1 import make_axes_locatable
-from clint.textui import progress
+from cpuinfo import cpuinfo
 
 def make_film_1d(*args, **kwargs):
     """
@@ -147,8 +147,12 @@ def make_film_2d(* args, **kwargs):
 
     options = make_plot_titles(nt, options)
 
-    for it in progress.bar(range(nt)):
-        plot_2d(it, x, y, z, plot_options, options)
+    pool = mp.Pool(processes=options['nprocs'])
+    params = zip(range(nt), [x]*nt, [y]*nt, z, [plot_options]*nt, [options]*nt)
+    pool.map(plot_2d, params)
+    pool.close()
+    pool.join()
+
     
     if options['crop']:
         crop_images(nt, options)
@@ -183,7 +187,7 @@ def set_default_options(options):
     options['cbar_ticks'] = None
     options['contours'] = 7
     options['cbar_tick_format'] = '%.2f'
-    options['nprocs'] = os.cpu_count()
+    options['nprocs'] = cpuinfo.get_cpu_info()['count']
     options['dpi'] = None
     options['bbox_inches'] = None
 
@@ -391,7 +395,7 @@ def plot_1d(args):
                                 bbox_inches=options['bbox_inches'])
     plt.close(fig)
 
-def plot_2d(it, x, y, z, plot_options, options):
+def plot_2d(args):
     """
     Plot the 2D contour plot for a given time step.
 
@@ -415,9 +419,11 @@ def plot_2d(it, x, y, z, plot_options, options):
         Dictionary of options which control various program functions.
     """
 
+    it, x, y, z, plot_options, options = args
+
     plt.clf()
     ax = plt.subplot(111)
-    im = ax.contourf(x, y, np.transpose(z[it,:,:]), options['contours'], 
+    im = ax.contourf(x, y, np.transpose(z), options['contours'], 
                      **plot_options)
 
     plt.title(options['title'][it])
