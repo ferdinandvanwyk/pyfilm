@@ -44,10 +44,9 @@ For OSX using the Brew package manager, these can be installed via:
 *pyfilm* will automatically check which of these is installed on your system 
 and default to ``avconv`` if both are found.
 
-Refer to this_  
-page to deal with Matplotlib backends in case plots don't display. TkAgg is a
-good backend for most machines. Be sure to have the system packages installed 
-before installing matplotlib.
+Refer to this_  page to deal with Matplotlib backends in case plots don't 
+display. TkAgg is a good backend for Linux machines. Be sure to have the 
+system packages installed before installing matplotlib.
 
 .. _libpng: http://www.libpng.org/pub/png/libpng.html
 .. _libav: https://libav.org/ 
@@ -62,12 +61,12 @@ Python dependencies
 * numpy_
 * matplotlib_
 * pillow_
-* clint_
+* py-cpuinfo_
 
 .. _numpy: http://www.numpy.org/
 .. _matplotlib: http://matplotlib.org/
 .. _pillow: https://python-pillow.github.io/
-.. _clint: https://github.com/kennethreitz/clint
+.. _py-cpuinfo: https://github.com/workhorsy/py-cpuinfo
 
 A complete list is found in the requirements.txt file and is installed by
 running:
