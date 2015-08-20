@@ -19,6 +19,18 @@ Python version support
 
 *pyfilm* supports Python 2.x and 3.x, however it is only tested on 3.4 and 2.7. 
 
+Installation
+------------
+
+*pyfilm* can be installed directly from `pip`:
+
+.. code:: bash
+
+    pip install pyfilm
+
+This should install all the required dependencies. If `numpy` doesn't get 
+automatically installed, install it first using `pip` and try again.
+
 System dependencies
 -------------------
 

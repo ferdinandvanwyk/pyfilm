@@ -151,6 +151,4 @@ class TestClass(object):
 
         options['title'] = ['test']*9
         
-        make_plot_titles(10, options)
-        w = recwarn.pop(UserWarning)
-        assert issubclass(w.category, UserWarning)
+        pytest.raises(ValueError, "make_plot_titles(10, options)")
