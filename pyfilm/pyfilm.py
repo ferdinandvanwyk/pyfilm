@@ -68,6 +68,9 @@ def make_film_1d(*args, **kwargs):
     else:
         raise ValueError('This function only takes in max. 2 arguments.')
 
+    if options['ylim'] == None:
+        options = set_ylim(y, options)
+
     options = make_plot_titles(nt, options)
 
     pool = mp.Pool(processes=options['nprocs'])
@@ -82,7 +85,7 @@ def make_film_1d(*args, **kwargs):
     encode_images(options)
 
 
-def make_film_2d(* args, **kwargs):
+def make_film_2d(*args, **kwargs):
     """
     The main function which generates 2D films.
 
@@ -290,7 +293,7 @@ def find_encoder(options):
 
     Parameters
     ----------
-    options : dict,
+    options : dict
         Dictionary of options which control various program functions.
     """
 
@@ -308,6 +311,32 @@ def find_encoder(options):
         options['encoder'] = 'avconv'
     elif f == 0 and a > 0:
         options['encoder'] = 'ffmpeg'
+
+    return(options)
+
+
+def set_ylim(y, options):
+    """
+    Sets the y limit for 1D films if not specified in options.
+
+    Parameters
+    ----------
+    y : array_like
+        Two dimensional array assumed to be of the form y(t, x). This specifies
+        the values to be plotted as a function of time.
+    options : dict
+        Dictionary of options which control various program functions.
+    """
+
+    y_min = np.min(y)
+    y_max = np.max(y)
+    if y_min*y_max < 0:
+        if np.abs(y_min) > np.abs(y_max):
+            options['ylim'] = [y_min, -y_min]
+        else:
+            options['ylim'] = [-y_max, y_max]
+    else:
+        options['ylim'] = [y_min, y_max]
 
     return(options)
 

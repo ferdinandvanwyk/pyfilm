@@ -53,6 +53,18 @@ class TestClass(object):
         options = find_encoder({})
         assert (options['encoder'] == 'avconv' or options['encoder'] == 'ffmpeg')
 
+    def test_set_ylim(self):
+        y = np.array([range(3)]*3)
+        options = {}
+        set_ylim(y, options)
+        assert(options['ylim'] == [0,2])
+        y = np.array([range(3)]*3) - 1
+        set_ylim(y, options)
+        assert(options['ylim'] == [-1,1])
+        y = np.array([range(3)]*3) - 2
+        set_ylim(y, options)
+        assert(options['ylim'] == [-2,0])
+
     def test_check_data_1d(self):
         x = np.arange(5)
         y = np.random.rand(5,4)
