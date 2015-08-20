@@ -54,22 +54,22 @@ class TestClass(object):
         assert (options['encoder'] == 'avconv' or options['encoder'] == 'ffmpeg')
 
     def test_set_ylim(self):
-        y = np.array([range(3)]*3)
+        y = np.array([range(5)]*5)
         options = {}
         set_ylim(y, options)
-        assert(options['ylim'] == [0,2])
-        y = np.array([range(3)]*3) - 1
+        assert(options['ylim'] == [0,4])
+        y = np.array([range(5)]*5) - 3
         set_ylim(y, options)
-        assert(options['ylim'] == [-1,1])
-        y = np.array([range(3)]*3) - 2
+        assert(options['ylim'] == [-3,3])
+        y = np.array([range(5)]*5) - 4
         set_ylim(y, options)
-        assert(options['ylim'] == [-2,0])
+        assert(options['ylim'] == [-4,0])
 
     def test_check_data_1d(self):
         x = np.arange(5)
         y = np.random.rand(5,4)
         pytest.raises(ValueError, "check_data_1d(x,y)")
-        
+    
     def test_plot_1d(self):
         x = np.arange(2)
         y = np.random.rand(2,2)
