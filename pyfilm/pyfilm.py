@@ -509,24 +509,69 @@ def crop_images(nt, options):
         Dictionary of options which control various program functions.
     """
 
-    w = np.empty([nt], dtype=int)
-    h = np.empty([nt], dtype=int)
-    for it in range(nt):
-        im = Image.open(options['frame_dir'] + '/{0}_{1:05d}.png'.format(
-                                                    options['file_name'], it))
-        w[it] = im.size[0]
-        h[it] = im.size[1]
+    pool = mp.Pool(processes=options['nprocs'])
+    params = zip(range(nt), [options]*nt)
+    frame_dims = np.array(pool.map(get_image_size, params))
+    pool.close()
+    pool.join()
 
-    w_min = np.min(w)
-    h_min = np.min(h)
+    w_min = np.min(frame_dims[:,0])
+    h_min = np.min(frame_dims[:,1])
     new_w = int(w_min/2)*2
     new_h = int(h_min/2)*2
-    for it in range(nt):
-        im = Image.open(options['frame_dir'] + '/{0}_{1:05d}.png'.format(
-                                                    options['file_name'], it))
-        im_crop = im.crop((0, 0, new_w, new_h))
-        im_crop.save(options['frame_dir'] + '/{0}_{1:05d}.png'.format(
-                                                     options['file_name'], it))
+
+    pool = mp.Pool(processes=options['nprocs'])
+    params = zip(range(nt), [new_w]*nt, [new_h]*nt, [options]*nt)
+    pool.map(crop_image, params)
+    pool.close()
+    pool.join()
+
+
+def get_image_size(args):
+    """
+    Returns the size of an image as a tuple of (width, height) in pixels.
+
+    Parameters
+    ----------
+
+    it : int
+        Time step of frame being analyzed.
+    options : dict
+        Dictionary of options which control various program functions.
+    """
+
+    it, options = args
+
+    im = Image.open(options['frame_dir'] + '/{0}_{1:05d}.png'.format(
+                                                options['file_name'], it))
+
+    return(im.size[0], im.size[1])
+
+
+def crop_image(args):
+    """
+    Crop single image at a given time step.
+
+    Parameters
+    ----------
+
+    it : int
+        Time step of frame being analyzed.
+    new_w : int
+        New width to crop images to.
+    new_h : int
+        New height to crop images to.
+    options : dict
+        Dictionary of options which control various program functions.
+    """
+
+    it, new_w, new_h, options = args
+
+    im = Image.open(options['frame_dir'] + '/{0}_{1:05d}.png'.format(
+                                                options['file_name'], it))
+    im_crop = im.crop((0, 0, new_w, new_h))
+    im_crop.save(options['frame_dir'] + '/{0}_{1:05d}.png'.format(
+                                                 options['file_name'], it))
 
 
 def make_plot_titles(nt, options):
