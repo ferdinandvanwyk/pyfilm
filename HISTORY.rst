@@ -1,7 +1,7 @@
 Change-log for PyFilm
 
-Version 0.2.2dev
-================
+Version 0.2.2 22/08/15
+======================
 
 * Parallelize image cropping
 

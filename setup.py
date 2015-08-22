@@ -4,10 +4,10 @@ from setuptools import setup
 
 setup(
     name = "pyfilm",
-    version = "0.2.1",
+    version = "0.2.2",
     author = "Ferdinand van Wyk",
     author_email = 'ferdinandvwyk@gmail.com',
-    description = "Easily create films of 1D and 2D NumPy arrays.",
+    description = "Easily create 1D and 2D films of NumPy arrays.",
     long_description = "PyFilm is a package which enables the quick creation of animations of NumPy arrays. It does this by writing each time step as a separate image and using either ffmpeg or avconv to stitch the images together into an animation. The package is designed to be very easy to use, and allow animations to be created with a single line.",
     license = "GNU",
     keywords = ['film', 'video', 'animation', 'numpy', 'ffmpeg', 'avconv'],
