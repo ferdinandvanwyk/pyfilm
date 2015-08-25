@@ -624,6 +624,12 @@ def encode_images(options):
                   str(options['file_name']) + "_%05d.png' -q 1 " +
                   options['film_dir'] + "/" + str(options['file_name']) +
                   ".mp4")
+        print("Encode command: avconv -threads " + str(options['nprocs']) + 
+              " -y -f image2 -r " + str(options['fps']) + " -i " +
+              "'" + options['frame_dir'] + '/' +
+              str(options['file_name']) + "_%05d.png' -q 1 " +
+              options['film_dir'] + "/" + str(options['file_name']) +
+              ".mp4")
     elif options['encoder'] == 'ffmpeg':
         os.system("ffmpeg -threads " + str(options['nprocs']) + " -y "
                   "-r " + str(options['fps']) + " -i " + "'" +
@@ -631,3 +637,9 @@ def encode_images(options):
                   "_%05d.png' -pix_fmt yuv420p -c:v libx264 -q 1 " +
                   options['film_dir'] + "/" + str(options['file_name']) +
                   ".mp4")
+        print("Encode command: ffmpeg -threads " + str(options['nprocs']) + 
+              " -y -r " + str(options['fps']) + " -i " + "'" +
+              options['frame_dir'] + '/' + str(options['file_name']) +
+              "_%05d.png' -pix_fmt yuv420p -c:v libx264 -q 1 " +
+              options['film_dir'] + "/" + str(options['file_name']) +
+              ".mp4")
