@@ -34,8 +34,8 @@ and default to ``avconv`` if both are found.
 Refer to this_ page to deal with Matplotlib backends in case plots don't 
 display. `TkAgg` is a good backend for most Linux distros. Be sure to have the 
 system packages installed before installing matplotlib. For OS X, the `macosx`
-backend is recommended since the `TkAgg` backend is not thread-safe and you may 
-encounter error messages similar to here_.
+or `Agg` backend is recommended since the `TkAgg` backend is not thread-safe 
+and you may encounter error messages similar to here_.
 
 .. _libpng: http://www.libpng.org/pub/png/libpng.html
 .. _libav: https://libav.org/ 
