@@ -50,8 +50,9 @@ The process has forked and you cannot use this CoreFoundation functionality...
 If you get the following error on OS X:
 
    The process has forked and you cannot use this CoreFoundation functionality
-   safely. You MUST exec().Break on __THE_PROCESS_HAS_FORKED_AND_YOU_CANNOT_USE_THIS_COREFOUNDATION_FUNCTIONALITY___YOU_MUST_EXEC__()
-   to debug.
+   safely. You MUST exec().Break on
+   __THE_PROCESS_HAS_FORKED_AND_YOU_CANNOT_USE_THIS_COREFOUNDATION_
+   FUNCTIONALITY___YOU_MUST_EXEC__() to debug.
 
 This means that the backend you are using is not thread-safe. See here_,
 but again the solution is to use the `Agg` backend.
