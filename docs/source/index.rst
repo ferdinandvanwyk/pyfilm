@@ -23,6 +23,7 @@ Contents
    getting_started.rst
    api_methods.rst
    non_api_methods.rst
+   known_issues.rst
 
 Indices and tables
 ==================
