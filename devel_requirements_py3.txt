@@ -1,0 +1,9 @@
+matplotlib
+numpy
+Pillow
+py-cpuinfo
+sphinx
+mock
+pytest
+nose
+numpydoc
