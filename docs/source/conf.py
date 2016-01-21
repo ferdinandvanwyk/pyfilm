@@ -22,7 +22,7 @@ from unittest.mock import MagicMock
 class Mock(MagicMock):
     @classmethod
     def __getattr__(cls, name):
-            return Mock()
+        return Mock()
 
 MOCK_MODULES = ['numpy', 'scipy', 'matplotlib', 'matplotlib.pyplot',
                 'mpl_toolkits.axes_grid1', 'PIL', 'Pillow', 'cpuinfo']

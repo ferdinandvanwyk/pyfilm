@@ -10,8 +10,8 @@ Plots aren't displaying
 This could be an issue with the Matplotlib backend. Refer to this_ page to read
 about the possible Matplotlib backends.
 
-Linux: usually `TkAgg`
-OS X: Use either `macosx` or `Agg`. 
+* Linux: usually `TkAgg`
+* OS X: Use either `macosx` or `Agg`. 
 
 OS X is prone to complaining about Python Framework versions, backends not 
 being thread-safe etc. See other issues on how to deal with those. Mostly this
@@ -53,7 +53,7 @@ If you get the following error on OS X:
    safely. You MUST exec().Break on __THE_PROCESS_HAS_FORKED_AND_YOU_CANNOT_USE_THIS_COREFOUNDATION_FUNCTIONALITY___YOU_MUST_EXEC__()
    to debug.
 
-This means that the backend you are using is not thread-safe. See this_ page,
+This means that the backend you are using is not thread-safe. See here_,
 but again the solution is to use the `Agg` backend.
 
-.. _this: http://stackoverflow.com/questions/8106002/using-the-python-multiprocessing-module-for-io-with-pygame-on-mac-os-10-7
+.. _here: http://stackoverflow.com/questions/8106002/using-the-python-multiprocessing-module-for-io-with-pygame-on-mac-os-10-7
