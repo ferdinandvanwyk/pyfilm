@@ -1,10 +1,12 @@
 Change-log for PyFilm
 
-Version 0.2.3dev
-================
+Version 0.2.3 - 21/01/16
+========================
 
 * Add printing of encoding command. Can easily encode again without 
   regenerating images to change FPS for example.
+* Updated documentation
+* Bug fixes
 
 Version 0.2.2 22/08/15
 ======================
