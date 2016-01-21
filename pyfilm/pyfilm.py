@@ -216,6 +216,10 @@ def set_user_options(options, user_options):
     for key, value in user_options.items():
         options[key] = value
 
+    # Addtional checks
+    if options['nprocs'] == None:
+        options['nprocs'] = cpuinfo.get_cpu_info()['count']
+
     return(options)
 
 
