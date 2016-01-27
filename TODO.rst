@@ -1,8 +1,6 @@
 To do list
 ==========
 
-* Investigate use of plt.ioff() to speed up plot saving.
-* Look into python GNUplot interface.
 * Look at Matplotlib animation examples_ for ideas.
 
 .. _examples: http://matplotlib.org/1.4.1/examples/animation/index.html
