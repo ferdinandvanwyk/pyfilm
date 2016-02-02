@@ -2,6 +2,7 @@ To do list
 ==========
 
 * Look at Matplotlib animation examples_ for ideas.
+* Allow different image formats.
 
 .. _examples: http://matplotlib.org/1.4.1/examples/animation/index.html
 
