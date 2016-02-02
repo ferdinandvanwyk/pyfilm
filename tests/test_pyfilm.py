@@ -81,6 +81,7 @@ class TestClass(object):
         make_plot_titles(2, options)
         args = (0, x, y[0,:], {}, options)
         plot_1d(args)
+        assert ('f_00000.png' in os.listdir('films/film_frames/'))
 
     def test_1d_1_arg(self):
         y = np.random.rand(2,2)
@@ -140,6 +141,7 @@ class TestClass(object):
         make_plot_titles(2, options)
         args = (0, x, y, z[0,:,:], {}, options)
         plot_2d(args)
+        assert ('f_00000.png' in os.listdir('films/film_frames/'))
 
     def test_check_data_2d(self):
         x = np.arange(5)

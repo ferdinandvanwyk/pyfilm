@@ -428,9 +428,9 @@ def plot_1d(args):
     ax.set_xlim(options['xlim'])
     ax.set_ylim(options['ylim'])
     if options['xticks'] is not None:
-        plt.xticks(options['xticks'])
+        ax.set_xticks(options['xticks'])
     if options['yticks'] is not None:
-        plt.xticks(options['yticks'])
+        ax.set_yticks(options['yticks'])
 
     ax.grid(options['grid'])
 
@@ -483,7 +483,7 @@ def plot_2d(args):
     if options['xticks'] is not None:
         plt.xticks(options['xticks'])
     if options['yticks'] is not None:
-        plt.xticks(options['yticks'])
+        plt.yticks(options['yticks'])
 
     plt.grid(options['grid'])
 
