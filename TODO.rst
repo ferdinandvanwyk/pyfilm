@@ -2,7 +2,6 @@ To do list
 ==========
 
 * Look at Matplotlib animation examples_ for ideas.
-* Change all pyplot commands to ax commands - bypass pyplot completely
 
 .. _examples: http://matplotlib.org/1.4.1/examples/animation/index.html
 
