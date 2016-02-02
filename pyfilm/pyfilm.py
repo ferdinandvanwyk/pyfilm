@@ -436,7 +436,7 @@ def plot_1d(args):
 
     ax.set_aspect(options['aspect'])
 
-    plt.savefig(options['frame_dir'] + '/{0}_{1:05d}.png'.format(
+    fig.savefig(options['frame_dir'] + '/{0}_{1:05d}.png'.format(
                 options['file_name'], it),
                 dpi=options['dpi'],
                 bbox_inches=options['bbox_inches'])
@@ -469,37 +469,37 @@ def plot_2d(args):
 
     it, x, y, z, plot_options, options = args
 
-    plt.clf()
-    ax = plt.subplot(111)
+    fig, ax = plt.subplots()
     im = ax.contourf(x, y, np.transpose(z), options['contours'],
                      **plot_options)
 
-    plt.title(options['title'][it])
-    plt.xlabel(options['xlabel'])
-    plt.ylabel(options['ylabel'])
+    ax.set_title(options['title'][it])
+    ax.set_xlabel(options['xlabel'])
+    ax.set_ylabel(options['ylabel'])
 
-    plt.xlim(options['xlim'])
-    plt.ylim(options['ylim'])
+    ax.set_xlim(options['xlim'])
+    ax.set_ylim(options['ylim'])
     if options['xticks'] is not None:
-        plt.xticks(options['xticks'])
+        ax.set_xticks(options['xticks'])
     if options['yticks'] is not None:
-        plt.yticks(options['yticks'])
+        ax.set_yticks(options['yticks'])
 
-    plt.grid(options['grid'])
+    ax.grid(options['grid'])
 
     ax.set_aspect(options['aspect'])
 
     divider = make_axes_locatable(ax)
     cax = divider.append_axes("right", size="5%", pad=0.05)
 
-    plt.colorbar(im, cax=cax, label=options['cbar_label'],
+    fig.colorbar(im, cax=cax, label=options['cbar_label'],
                  ticks=options['cbar_ticks'],
                  format=options['cbar_tick_format'])
 
-    plt.savefig(options['frame_dir'] + '/{0}_{1:05d}.png'.format(
+    fig.savefig(options['frame_dir'] + '/{0}_{1:05d}.png'.format(
                 options['file_name'], it),
                 dpi=options['dpi'],
                 bbox_inches=options['bbox_inches'])
+    plt.close(fig)
 
 
 def crop_images(nt, options):
