@@ -1,9 +1,11 @@
 matplotlib
+mock
+nose
 numpy
+numpydoc
+pep8
 Pillow
 py-cpuinfo
-sphinx
-mock
 pytest
-nose
-numpydoc
+sphinx
+

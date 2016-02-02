@@ -194,6 +194,7 @@ def set_default_options(options):
     options['img_fmt'] = 'png'
     options['nprocs'] = cpuinfo.get_cpu_info()['count']
     options['title'] = ''
+    options['video_fmt'] = 'mp4'
     options['xlabel'] = 'x'
     options['xlim'] = None
     options['xticks'] = None
@@ -648,13 +649,13 @@ def encode_images(options):
                   "'" + options['frame_dir'] + '/' +
                   str(options['file_name']) + "_%05d." + options['img_fmt'] +
                   "' -q 1 " + options['film_dir'] + "/" +
-                  str(options['file_name']) + ".mp4")
+                  str(options['file_name']) + "." + options['video_fmt'])
         print("Encode command: avconv -threads " + str(options['nprocs']) +
               " -y -f image2 -r " + str(options['fps']) + " -i " +
               "'" + options['frame_dir'] + '/' +
               str(options['file_name']) + "_%05d." + options['img_fmt'] + 
               "' -q 1 " + options['film_dir'] + "/" + 
-              str(options['file_name']) + ".mp4")
+              str(options['file_name']) + "." + options['video_fmt'])
     elif options['encoder'] == 'ffmpeg':
         os.system("ffmpeg -threads " + str(options['nprocs']) + " -y "
                   "-r " + str(options['fps']) + " -i " + "'" +
@@ -662,11 +663,11 @@ def encode_images(options):
                   "_%05d." + options['img_fmt'] + 
                   "' -pix_fmt yuv420p -c:v libx264 -q 1 " + 
                   options['film_dir'] + "/" + str(options['file_name']) +
-                  ".mp4")
+                  "." + options['video_fmt'])
         print("Encode command: ffmpeg -threads " + str(options['nprocs']) +
               " -y -r " + str(options['fps']) + " -i " + "'" +
               options['frame_dir'] + '/' + str(options['file_name']) +
               "_%05d." + options['img_fmt'] + 
               "' -pix_fmt yuv420p -c:v libx264 -q 1 " +
               options['film_dir'] + "/" + str(options['file_name']) +
-              ".mp4")
+              "." + options['video_fmt'])

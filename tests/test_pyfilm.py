@@ -30,6 +30,7 @@ class TestClass(object):
         assert options['img_fmt'] == 'png'
         assert type(options['nprocs']) == int
         assert options['title'] == ''
+        assert options['video_fmt'] == 'mp4'
         assert options['xlabel'] == 'x'
         assert options['xlim'] == None
         assert options['xticks'] == None
@@ -175,4 +176,3 @@ class TestClass(object):
         make_film_1d(x, y, options={'img_fmt':'jpg'})
         assert ('f_00000.jpg' in os.listdir('films/film_frames/'))
         assert ('f.mp4' in os.listdir('films/'))
-        

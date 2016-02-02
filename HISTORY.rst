@@ -7,6 +7,7 @@ Version 0.2.4dev
 * Add axes tick customization.
 * Change from pyplot to Axis interface.
 * Allow different image formats.
+* Allow different video formats.
 
 Version 0.2.3 - 21/01/16
 ========================
