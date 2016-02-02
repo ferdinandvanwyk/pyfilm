@@ -5,7 +5,8 @@ Version 0.2.4dev
 
 * Add plt.ioff() as default - small performance benefit.
 * Add axes tick customization.
-* Change from pyplot to Axis interface
+* Change from pyplot to Axis interface.
+* Allow different image formats.
 
 Version 0.2.3 - 21/01/16
 ========================
