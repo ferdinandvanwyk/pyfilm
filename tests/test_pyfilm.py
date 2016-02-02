@@ -20,20 +20,21 @@ class TestClass(object):
     def test_set_default_options(self):
         options = {}
         options = set_default_options(options)
-        assert options['xlabel'] == 'x'
-        assert options['ylabel'] == 'y'
-        assert options['title'] == ''
-        assert options['xlim'] == None
-        assert options['ylim'] == None
-        assert options['grid'] == False
         assert options['aspect'] == 'auto'
-
-        assert options['fps'] == 10
-        assert options['encoder'] == None
-        assert options['file_name'] == 'f'
         assert options['crop'] == True
         assert options['cbar_label'] == 'f(x,y)'
+        assert options['encoder'] == None
+        assert options['fps'] == 10
+        assert options['file_name'] == 'f'
+        assert options['grid'] == False
         assert type(options['nprocs']) == int
+        assert options['title'] == ''
+        assert options['xlabel'] == 'x'
+        assert options['xlim'] == None
+        assert options['xticks'] == None
+        assert options['ylabel'] == 'y'
+        assert options['ylim'] == None
+        assert options['yticks'] == None
 
     def test_set_user_options(self):
         options = {}

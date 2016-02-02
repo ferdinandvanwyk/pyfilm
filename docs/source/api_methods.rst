@@ -75,8 +75,10 @@ title            ''              [str | list] Specify title as string or array
                                  iterated through
 xlabel           'x'             [str] Specify xlabel. May include LaTeX 
 xlim             None            [None | array] Set x-axis limits
+xticks           None            [None | array] Set the x-axis tick labels
 ylabel           'y'             [str] Specify ylabel. May include LaTeX 
 ylim             None            [None | array] Set y-axis limits
+yticks           None            [None | array] Set the y-axis tick labels
 ================ =============== ============================================== 
 
 .. rubric:: Footnotes

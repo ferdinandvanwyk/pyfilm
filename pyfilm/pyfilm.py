@@ -174,27 +174,28 @@ def set_default_options(options):
         Dictionary of options which control various program functions.
     """
 
-    options['title'] = ''
-    options['xlabel'] = 'x'
-    options['ylabel'] = 'y'
-    options['xlim'] = None
-    options['ylim'] = None
-    options['grid'] = False
     options['aspect'] = 'auto'
-
-    options['encoder'] = None
-    options['fps'] = 10
-    options['file_name'] = 'f'
-    options['film_dir'] = 'films'
-    options['frame_dir'] = 'films/film_frames'
-    options['crop'] = True
+    options['bbox_inches'] = None
     options['cbar_label'] = 'f(x,y)'
     options['cbar_ticks'] = None
-    options['contours'] = 7
     options['cbar_tick_format'] = '%.2f'
-    options['nprocs'] = cpuinfo.get_cpu_info()['count']
+    options['contours'] = 7
+    options['crop'] = True
     options['dpi'] = None
-    options['bbox_inches'] = None
+    options['encoder'] = None
+    options['file_name'] = 'f'
+    options['film_dir'] = 'films'
+    options['fps'] = 10
+    options['frame_dir'] = 'films/film_frames'
+    options['grid'] = False
+    options['nprocs'] = cpuinfo.get_cpu_info()['count']
+    options['title'] = ''
+    options['xlabel'] = 'x'
+    options['xlim'] = None
+    options['xticks'] = None
+    options['ylabel'] = 'y'
+    options['ylim'] = None
+    options['yticks'] = None
 
     return(options)
 
@@ -417,19 +418,23 @@ def plot_1d(args):
 
     it, x, y, plot_options, options = args
 
-    fig = plt.figure()
-    plt.plot(x, y, **plot_options)
+    fig, ax = plt.subplots()
+    ax.plot(x, y, **plot_options)
 
-    plt.title(options['title'][it])
-    plt.xlabel(options['xlabel'])
-    plt.ylabel(options['ylabel'])
+    ax.set_title(options['title'][it])
+    ax.set_xlabel(options['xlabel'])
+    ax.set_ylabel(options['ylabel'])
 
-    plt.xlim(options['xlim'])
-    plt.ylim(options['ylim'])
+    ax.set_xlim(options['xlim'])
+    ax.set_ylim(options['ylim'])
+    if options['xticks'] is not None:
+        plt.xticks(options['xticks'])
+    if options['yticks'] is not None:
+        plt.xticks(options['yticks'])
 
-    plt.grid(options['grid'])
+    ax.grid(options['grid'])
 
-    plt.axes().set_aspect(options['aspect'])
+    ax.set_aspect(options['aspect'])
 
     plt.savefig(options['frame_dir'] + '/{0}_{1:05d}.png'.format(
                 options['file_name'], it),
@@ -475,6 +480,10 @@ def plot_2d(args):
 
     plt.xlim(options['xlim'])
     plt.ylim(options['ylim'])
+    if options['xticks'] is not None:
+        plt.xticks(options['xticks'])
+    if options['yticks'] is not None:
+        plt.xticks(options['yticks'])
 
     plt.grid(options['grid'])
 
