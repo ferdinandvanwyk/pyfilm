@@ -67,6 +67,10 @@ film_frames      'films/         [str] Location where film frames are written
                  film_frames'
 fps              10              [int] Frames per second of the film                      
 grid             True            [True | False] Controls plotting of gridlines
+img_fmt          'png'           ['png' | 'jpg' | 'bmp'] Films can only be made
+                                 using these image formats. *pyfilm* will write
+                                 frames for any image format that Matplotlib
+                                 supports and print a warning.
 nprocs           None            [None | int] Set max number of cpu cores to 
                                  use. Defaults to max number of cores on 
                                  machine

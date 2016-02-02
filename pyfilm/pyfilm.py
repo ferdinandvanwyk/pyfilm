@@ -80,10 +80,11 @@ def make_film_1d(*args, **kwargs):
     pool.close()
     pool.join()
 
-    if options['crop']:
-        crop_images(nt, options)
+    if options['img_fmt'] in ['png', 'jpg']:
+        if options['crop']:
+            crop_images(nt, options)
 
-    encode_images(options)
+        encode_images(options)
 
 
 def make_film_2d(*args, **kwargs):
@@ -158,10 +159,12 @@ def make_film_2d(*args, **kwargs):
     pool.close()
     pool.join()
 
-    if options['crop']:
-        crop_images(nt, options)
 
-    encode_images(options)
+    if options['img_fmt'] in ['png', 'jpg']:
+        if options['crop']:
+            crop_images(nt, options)
+
+        encode_images(options)
 
 
 def set_default_options(options):
@@ -188,6 +191,7 @@ def set_default_options(options):
     options['fps'] = 10
     options['frame_dir'] = 'films/film_frames'
     options['grid'] = False
+    options['img_fmt'] = 'png'
     options['nprocs'] = cpuinfo.get_cpu_info()['count']
     options['title'] = ''
     options['xlabel'] = 'x'
@@ -222,6 +226,10 @@ def set_user_options(options, user_options):
     if options['nprocs'] == None:
         options['nprocs'] = cpuinfo.get_cpu_info()['count']
 
+    if options['img_fmt'] not in ['png', 'jpg']:
+        warnings.warn('Image format selected will not create a film. Please '
+                      'select png or jpg.')
+
     return(options)
 
 
@@ -239,7 +247,7 @@ def set_up_dirs(options):
     if options['frame_dir'] not in os.listdir('.'):
         os.system("mkdir -p " + options['frame_dir'])
     os.system("rm -f " + options['frame_dir'] + "/" + options['file_name'] +
-              "_*.png")
+              "_*." + options['img_fmt'])
 
 
 def check_data_1d(x, y):
@@ -436,8 +444,8 @@ def plot_1d(args):
 
     ax.set_aspect(options['aspect'])
 
-    fig.savefig(options['frame_dir'] + '/{0}_{1:05d}.png'.format(
-                options['file_name'], it),
+    fig.savefig(options['frame_dir'] + '/{0}_{1:05d}.{2}'.format(
+                options['file_name'], it, options['img_fmt']),
                 dpi=options['dpi'],
                 bbox_inches=options['bbox_inches'])
     plt.close(fig)
@@ -495,8 +503,8 @@ def plot_2d(args):
                  ticks=options['cbar_ticks'],
                  format=options['cbar_tick_format'])
 
-    fig.savefig(options['frame_dir'] + '/{0}_{1:05d}.png'.format(
-                options['file_name'], it),
+    fig.savefig(options['frame_dir'] + '/{0}_{1:05d}.{2}'.format(
+                options['file_name'], it, options['img_fmt']),
                 dpi=options['dpi'],
                 bbox_inches=options['bbox_inches'])
     plt.close(fig)
@@ -556,8 +564,9 @@ def get_image_size(args):
 
     it, options = args
 
-    im = Image.open(options['frame_dir'] + '/{0}_{1:05d}.png'.format(
-                                                options['file_name'], it))
+    im = Image.open(options['frame_dir'] + '/{0}_{1:05d}.{2}'.format(
+                                                options['file_name'], it,
+                                                options['img_fmt']))
 
     return(im.size[0], im.size[1])
 
@@ -581,11 +590,13 @@ def crop_image(args):
 
     it, new_w, new_h, options = args
 
-    im = Image.open(options['frame_dir'] + '/{0}_{1:05d}.png'.format(
-                                                options['file_name'], it))
+    im = Image.open(options['frame_dir'] + '/{0}_{1:05d}.{2}'.format(
+                                                options['file_name'], it,
+                                                options['img_fmt']))
     im_crop = im.crop((0, 0, new_w, new_h))
-    im_crop.save(options['frame_dir'] + '/{0}_{1:05d}.png'.format(
-                                                 options['file_name'], it))
+    im_crop.save(options['frame_dir'] + '/{0}_{1:05d}.{2}'.format(
+                                                 options['file_name'], it,
+                                                 options['img_fmt']))
 
 
 def make_plot_titles(nt, options):
@@ -635,25 +646,27 @@ def encode_images(options):
         os.system("avconv -threads " + str(options['nprocs']) + " -y -f "
                   "image2 -r " + str(options['fps']) + " -i " +
                   "'" + options['frame_dir'] + '/' +
-                  str(options['file_name']) + "_%05d.png' -q 1 " +
-                  options['film_dir'] + "/" + str(options['file_name']) +
-                  ".mp4")
-        print("Encode command: avconv -threads " + str(options['nprocs']) + 
+                  str(options['file_name']) + "_%05d." + options['img_fmt'] +
+                  "' -q 1 " + options['film_dir'] + "/" +
+                  str(options['file_name']) + ".mp4")
+        print("Encode command: avconv -threads " + str(options['nprocs']) +
               " -y -f image2 -r " + str(options['fps']) + " -i " +
               "'" + options['frame_dir'] + '/' +
-              str(options['file_name']) + "_%05d.png' -q 1 " +
-              options['film_dir'] + "/" + str(options['file_name']) +
-              ".mp4")
+              str(options['file_name']) + "_%05d." + options['img_fmt'] + 
+              "' -q 1 " + options['film_dir'] + "/" + 
+              str(options['file_name']) + ".mp4")
     elif options['encoder'] == 'ffmpeg':
         os.system("ffmpeg -threads " + str(options['nprocs']) + " -y "
                   "-r " + str(options['fps']) + " -i " + "'" +
                   options['frame_dir'] + '/' + str(options['file_name']) +
-                  "_%05d.png' -pix_fmt yuv420p -c:v libx264 -q 1 " +
+                  "_%05d." + options['img_fmt'] + 
+                  "' -pix_fmt yuv420p -c:v libx264 -q 1 " + 
                   options['film_dir'] + "/" + str(options['file_name']) +
                   ".mp4")
-        print("Encode command: ffmpeg -threads " + str(options['nprocs']) + 
+        print("Encode command: ffmpeg -threads " + str(options['nprocs']) +
               " -y -r " + str(options['fps']) + " -i " + "'" +
               options['frame_dir'] + '/' + str(options['file_name']) +
-              "_%05d.png' -pix_fmt yuv420p -c:v libx264 -q 1 " +
+              "_%05d." + options['img_fmt'] + 
+              "' -pix_fmt yuv420p -c:v libx264 -q 1 " +
               options['film_dir'] + "/" + str(options['file_name']) +
               ".mp4")

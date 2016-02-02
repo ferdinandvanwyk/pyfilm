@@ -27,6 +27,7 @@ class TestClass(object):
         assert options['fps'] == 10
         assert options['file_name'] == 'f'
         assert options['grid'] == False
+        assert options['img_fmt'] == 'png'
         assert type(options['nprocs']) == int
         assert options['title'] == ''
         assert options['xlabel'] == 'x'
@@ -167,3 +168,11 @@ class TestClass(object):
         options['title'] = ['test']*9
         
         pytest.raises(ValueError, "make_plot_titles(10, options)")
+
+    def test_img_fmt(self):
+        x = np.arange(2)
+        y = np.random.rand(2,2)
+        make_film_1d(x, y, options={'img_fmt':'jpg'})
+        assert ('f_00000.jpg' in os.listdir('films/film_frames/'))
+        assert ('f.mp4' in os.listdir('films/'))
+        
