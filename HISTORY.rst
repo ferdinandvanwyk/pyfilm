@@ -3,7 +3,8 @@ Change-log for PyFilm
 Version 0.2.4dev
 ================
 
-* Add plt.ioff() as default - small performance benefit
+* Add plt.ioff() as default - small performance benefit.
+* Add axes tick customization.
 
 Version 0.2.3 - 21/01/16
 ========================
