@@ -6,8 +6,8 @@
 Welcome to pyfilm's documentation!
 ==================================
 
-.. image:: https://travis-ci.org/ferdinandvwyk/pyfilm.svg?branch=master
-   :target: https://travis-ci.org/ferdinandvwyk/pyfilm
+.. image:: https://travis-ci.org/ferdinandvanwyk/pyfilm.svg?branch=master
+   :target: https://travis-ci.org/ferdinandvanwyk/pyfilm
 .. image:: https://readthedocs.org/projects/pyfilm/badge/?version=latest
    :target: https://readthedocs.org/projects/pyfilm/badge/?version=latest
    :alt: Documentation Status
