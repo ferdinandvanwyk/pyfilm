@@ -18,20 +18,14 @@ import os
 import shlex
 from unittest.mock import MagicMock
 
-# Specify mock modules so they don't get built on RTD
-class Mock(MagicMock):
-    @classmethod
-    def __getattr__(cls, name):
-        return Mock()
-
 MOCK_MODULES = ['numpy', 'scipy', 'matplotlib', 'matplotlib.pyplot',
                 'mpl_toolkits.axes_grid1', 'PIL', 'Pillow', 'cpuinfo']
-sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES) 
+sys.modules.update((mod_name, MagicMock()) for mod_name in MOCK_MODULES)
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-#sys.path.insert(0, os.path.abspath('.'))
+sys.path.insert(0, os.path.abspath('../../'))
 
 # -- General configuration ------------------------------------------------
 
