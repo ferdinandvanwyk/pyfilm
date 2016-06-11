@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to pyfilm's documentation!
-==================================
+pyfilm - Matplotlib animations in one line
+==========================================
 
 .. image:: https://travis-ci.org/ferdinandvanwyk/pyfilm.svg?branch=master
    :target: https://travis-ci.org/ferdinandvanwyk/pyfilm
