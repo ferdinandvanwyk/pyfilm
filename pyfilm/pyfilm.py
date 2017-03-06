@@ -65,9 +65,10 @@ def make_film_1d(*args, **kwargs):
         x = np.array(args[0])
         y = np.array(args[1])
         nt = y.shape[0]
-        check_data_1d(x, y)
     else:
         raise ValueError('This function only takes in max. 2 arguments.')
+
+    check_data_1d(x, y)
 
     if options['ylim'] == None:
         options = set_ylim(y, options)
@@ -269,6 +270,13 @@ def check_data_1d(x, y):
     """
     x_s = x.shape
     y_s = y.shape
+
+    if len(x_s) != 1:
+        raise IndexError('x must be one dimensional.')
+
+    if len(y_s) != 2:
+        raise IndexError('y must be two dimensional.')
+
     if x_s[0] != y_s[1]:
         raise ValueError('x and y must have the same length: '
                          '{0}, {1}'.format(x_s[0], y_s[1]))
@@ -294,6 +302,16 @@ def check_data_2d(x, y, z):
     x_s = x.shape
     y_s = y.shape
     z_s = z.shape
+
+    if len(x_s) != 1:
+        raise IndexError('x must be one dimensional.')
+
+    if len(y_s) != 1:
+        raise IndexError('y must be one dimensional.')
+
+    if len(z_s) != 3:
+        raise IndexError('y must be three dimensional.')
+
     if x_s[0] != z_s[1]:
         raise ValueError('x and z must have the same length: '
                          '{0}, {1}'.format(x_s[0], z_s[1]))
@@ -653,21 +671,21 @@ def encode_images(options):
         print("Encode command: avconv -threads " + str(options['nprocs']) +
               " -y -f image2 -r " + str(options['fps']) + " -i " +
               "'" + options['frame_dir'] + '/' +
-              str(options['file_name']) + "_%05d." + options['img_fmt'] + 
-              "' -q 1 " + options['film_dir'] + "/" + 
+              str(options['file_name']) + "_%05d." + options['img_fmt'] +
+              "' -q 1 " + options['film_dir'] + "/" +
               str(options['file_name']) + "." + options['video_fmt'])
     elif options['encoder'] == 'ffmpeg':
         os.system("ffmpeg -threads " + str(options['nprocs']) + " -y "
                   "-r " + str(options['fps']) + " -i " + "'" +
                   options['frame_dir'] + '/' + str(options['file_name']) +
-                  "_%05d." + options['img_fmt'] + 
-                  "' -pix_fmt yuv420p -c:v libx264 -q 1 " + 
+                  "_%05d." + options['img_fmt'] +
+                  "' -pix_fmt yuv420p -c:v libx264 -q 1 " +
                   options['film_dir'] + "/" + str(options['file_name']) +
                   "." + options['video_fmt'])
         print("Encode command: ffmpeg -threads " + str(options['nprocs']) +
               " -y -r " + str(options['fps']) + " -i " + "'" +
               options['frame_dir'] + '/' + str(options['file_name']) +
-              "_%05d." + options['img_fmt'] + 
+              "_%05d." + options['img_fmt'] +
               "' -pix_fmt yuv420p -c:v libx264 -q 1 " +
               options['film_dir'] + "/" + str(options['file_name']) +
               "." + options['video_fmt'])
