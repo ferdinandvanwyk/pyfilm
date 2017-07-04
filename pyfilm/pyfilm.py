@@ -153,8 +153,6 @@ def make_film_2d(*args, **kwargs):
     except KeyError:
         plot_options = calculate_contours(z, options, plot_options)
 
-    print(plot_options)
-
     if type(options['cbar_ticks']) == np.ndarray:
         pass
     elif type(options['cbar_ticks']) == int or options['cbar_ticks'] == None:
