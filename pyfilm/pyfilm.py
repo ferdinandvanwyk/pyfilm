@@ -41,14 +41,12 @@ def make_film_1d(*args, **kwargs):
 
     options = {}
     options = set_default_options(options)
-    try:
+    if 'options' in kwargs:
         options = set_user_options(options, kwargs['options'])
-    except KeyError:
-        pass
 
-    try:
+    if 'plot_options' in kwargs:
         plot_options = kwargs['plot_options']
-    except KeyError:
+    else:
         plot_options = {}
 
     set_up_dirs(options)
@@ -110,14 +108,12 @@ def make_film_2d(*args, **kwargs):
     """
     options = {}
     options = set_default_options(options)
-    try:
+    if 'options' in kwargs:
         options = set_user_options(options, kwargs['options'])
-    except KeyError:
-        pass
 
-    try:
+    if 'plot_options' in kwargs:
         plot_options = kwargs['plot_options']
-    except KeyError:
+    else:
         plot_options = {}
 
     set_up_dirs(options)
@@ -147,10 +143,7 @@ def make_film_2d(*args, **kwargs):
     else:
         raise ValueError('This function only takes in max. 3 arguments.')
 
-    try:
-        if plot_options['levels']:
-            pass
-    except KeyError:
+    if 'levels' not in plot_options:
         plot_options = calculate_contours(z, options, plot_options)
 
     if type(options['cbar_ticks']) == np.ndarray:
