@@ -220,46 +220,16 @@ class TestClass(object):
         options = {}
         options = set_default_options(options)
         plot_options = {}
-        z = np.random.randint(low=0, high=2, size=[2,2,2])
+        z = np.reshape(np.arange(8), [2,2,2])
         options = calculate_contours(z, options, plot_options)
-        assert np.sum(plot_options['levels'] - np.linspace(0, 1, 11)) < 1e-5
-
-        options = {}
-        options = set_default_options(options)
-        plot_options = {}
-        z = np.random.randint(low=-1, high=2, size=[2,2,2])
-        options = calculate_contours(z, options, plot_options)
-        assert np.sum(plot_options['levels'] - np.linspace(-1, 1, 11)) < 1e-5
-
-        options = {}
-        options = set_default_options(options)
-        plot_options = {}
-        z = np.random.randint(low=-2, high=1, size=[2,2,2])
-        options = calculate_contours(z, options, plot_options)
-        assert np.sum(plot_options['levels'] - np.linspace(-2, 0, 11)) < 1e-5
+        assert np.sum(plot_options['levels'] - np.linspace(0, 7, 11)) < 1e-5
 
         options = {}
         options = set_default_options(options)
         options['ncontours'] = 21
         plot_options = {}
-        z = np.random.randint(low=0, high=2, size=[2,2,2])
+        z = np.reshape(np.arange(8), [2,2,2])
         options = calculate_contours(z, options, plot_options)
-        assert np.sum(plot_options['levels'] - np.linspace(0, 1, 21)) < 1e-5
-
-        options = {}
-        options = set_default_options(options)
-        options['ncontours'] = 21
-        plot_options = {}
-        z = np.random.randint(low=-1, high=2, size=[2,2,2])
-        options = calculate_contours(z, options, plot_options)
-        assert np.sum(plot_options['levels'] - np.linspace(-1, 1, 21)) < 1e-5
-
-        options = {}
-        options = set_default_options(options)
-        options['ncontours'] = 21
-        plot_options = {}
-        z = np.random.randint(low=-2, high=1, size=[2,2,2])
-        options = calculate_contours(z, options, plot_options)
-        assert np.sum(plot_options['levels'] - np.linspace(-2, 0, 21)) < 1e-5
+        assert np.sum(plot_options['levels'] - np.linspace(0, 7, 21)) < 1e-5
 
 
