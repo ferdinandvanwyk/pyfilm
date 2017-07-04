@@ -2,10 +2,9 @@ sudo: false
 language: python
 python:
   - "2.7"
-  - "3.4"
-  - "3.5"
+  - "3.6"
 notifications:
-    email: 
+    email:
         on_success: change
         on_failure: change
 # Install apt-get packages on new container-based infrastructure
@@ -25,14 +24,14 @@ before_install:
     - conda config --set always_yes yes --set changeps1 no
     - conda update -q conda
 # command to install dependencies
-install: 
+install:
     - conda install --yes python=$TRAVIS_PYTHON_VERSION pip numpy matplotlib Pillow
-    - pip install pytest  # not yet available for py3 in anaconda 
+    - pip install pytest  # not yet available for py3 in anaconda
     - pip install pytest-cov coverage coveralls
     - pip install py-cpuinfo
     - python setup.py install
 # command to run tests
-script: 
+script:
     - py.test --cov pyfilm tests
 after_success:
     - coveralls --verbose

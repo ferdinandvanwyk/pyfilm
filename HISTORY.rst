@@ -1,5 +1,10 @@
 Change-log for PyFilm
 
+Version 0.2.5 - 04/07/17
+========================
+
+* Automatic contour calculation.
+
 Version 0.2.4 - 02/02/16
 ========================
 
@@ -12,7 +17,7 @@ Version 0.2.4 - 02/02/16
 Version 0.2.3 - 21/01/16
 ========================
 
-* Add printing of encoding command. Can easily encode again without 
+* Add printing of encoding command. Can easily encode again without
   regenerating images to change FPS for example.
 * Updated documentation
 * Bug fixes
