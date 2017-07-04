@@ -55,7 +55,6 @@ bbox_inches      None            [None | 'tight' | float] Bbox in inches. Only
 cbar_label       'z'             [str] Label of the contour plot color bar
 cbar_ticks       None            [None | int | np.ndarray] Set the color bar ticks
 cbar_tick_format '%.2f'          [str] Print format of the color bar ticks
-contours         7               [int] Number of contour levels
 crop             True            [True | False] Crops images before encoding
 dpi              None            [None | int] DPI of saved images. Defaults to
                                  savefig.dpi value in matplotlibrc file.
@@ -71,6 +70,9 @@ img_fmt          'png'           ['png' | 'jpg' | 'bmp'] Films can only be made
                                  using these image formats. *pyfilm* will write
                                  frames for any image format that Matplotlib
                                  supports and print a warning.
+ncontours        11              [int] Number of contours used in 2D plots.
+                                 Ignored when ``levels`` is specified in
+                                 ``plot_options``.
 nprocs           None            [None | int] Set max number of cpu cores to
                                  use. Defaults to max number of cores on
                                  machine.

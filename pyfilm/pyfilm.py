@@ -41,14 +41,12 @@ def make_film_1d(*args, **kwargs):
 
     options = {}
     options = set_default_options(options)
-    try:
+    if 'options' in kwargs:
         options = set_user_options(options, kwargs['options'])
-    except KeyError:
-        pass
 
-    try:
+    if 'plot_options' in kwargs:
         plot_options = kwargs['plot_options']
-    except KeyError:
+    else:
         plot_options = {}
 
     set_up_dirs(options)
@@ -110,14 +108,12 @@ def make_film_2d(*args, **kwargs):
     """
     options = {}
     options = set_default_options(options)
-    try:
+    if 'options' in kwargs:
         options = set_user_options(options, kwargs['options'])
-    except KeyError:
-        pass
 
-    try:
+    if 'plot_options' in kwargs:
         plot_options = kwargs['plot_options']
-    except KeyError:
+    else:
         plot_options = {}
 
     set_up_dirs(options)
@@ -146,6 +142,9 @@ def make_film_2d(*args, **kwargs):
         nt = z.shape[0]
     else:
         raise ValueError('This function only takes in max. 3 arguments.')
+
+    if 'levels' not in plot_options:
+        plot_options = calculate_contours(z, options, plot_options)
 
     if type(options['cbar_ticks']) == np.ndarray:
         pass
@@ -183,7 +182,6 @@ def set_default_options(options):
     options['cbar_label'] = 'f(x,y)'
     options['cbar_ticks'] = None
     options['cbar_tick_format'] = '%.2f'
-    options['contours'] = 7
     options['crop'] = True
     options['dpi'] = None
     options['encoder'] = None
@@ -194,6 +192,7 @@ def set_default_options(options):
     options['grid'] = False
     options['img_fmt'] = 'png'
     options['nprocs'] = cpuinfo.get_cpu_info()['count']
+    options['ncontours'] = 11
     options['title'] = ''
     options['video_fmt'] = 'mp4'
     options['xlabel'] = 'x'
@@ -374,6 +373,44 @@ def set_ylim(y, options):
     return(options)
 
 
+def calculate_contours(z, options, plot_options):
+    """
+    Calculate the contours based on the array extremes.
+
+    There are two options for options['ncontours']:
+
+    * None: Automatically determine the extrama and set 11 contours.
+    * int: Automatically determine the extrama and set specified number of
+      contours.
+
+    Parameters
+    ----------
+
+    z : array_like
+        The 3D array being plotted: z(x, y).
+    options : dict
+        Dictionary of options which control various program functions.
+    plot_options : dict
+        Dictionary of plot customizations which are evaluated for each plot.
+        Here we modify the matplotlib option 'levels'.
+    """
+
+    z_min = np.min(z)
+    z_max = np.max(z)
+    if z_min*z_max < 0:
+        if np.abs(z_max) > np.abs(z_min):
+            plot_options['levels'] = np.around(np.linspace(-z_max, z_max,
+                                              options['ncontours']), 7)
+        else:
+            plot_options['levels'] = np.around(np.linspace(z_min, -z_min,
+                                              options['ncontours']), 7)
+    elif z_min*z_max >= 0:
+        plot_options['levels'] = np.around(np.linspace(z_min, z_max,
+                                          options['ncontours']), 7)
+
+    return(plot_options)
+
+
 def calculate_cbar_ticks(z, options):
     """
     Calculate the color bar ticks based on the array extremes.
@@ -497,8 +534,7 @@ def plot_2d(args):
     it, x, y, z, plot_options, options = args
 
     fig, ax = plt.subplots()
-    im = ax.contourf(x, y, np.transpose(z), options['contours'],
-                     **plot_options)
+    im = ax.contourf(x, y, np.transpose(z), **plot_options)
 
     ax.set_title(options['title'][it])
     ax.set_xlabel(options['xlabel'])

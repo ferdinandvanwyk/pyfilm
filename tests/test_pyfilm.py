@@ -28,6 +28,7 @@ class TestClass(object):
         assert options['file_name'] == 'f'
         assert options['grid'] == False
         assert options['img_fmt'] == 'png'
+        assert options['ncontours'] == 11
         assert type(options['nprocs']) == int
         assert options['title'] == ''
         assert options['video_fmt'] == 'mp4'
@@ -192,7 +193,6 @@ class TestClass(object):
         assert len(options['title']) == 10
 
         options['title'] = ['test']*9
-
         pytest.raises(ValueError, "make_plot_titles(10, options)")
 
     def test_img_fmt(self):
@@ -201,3 +201,35 @@ class TestClass(object):
         make_film_1d(x, y, options={'img_fmt':'jpg'})
         assert ('f_00000.jpg' in os.listdir('films/film_frames/'))
         assert ('f.mp4' in os.listdir('films/'))
+
+    def test_calculate_cbar_ticks(self):
+        options = {}
+        options = set_default_options(options)
+        z = np.random.randint(low=0, high=2, size=[2,2,2])
+        options = calculate_cbar_ticks(z, options)
+        assert np.sum(options['cbar_ticks'] - np.linspace(0, 1, 5)) < 1e-5
+
+        options = {}
+        options = set_default_options(options)
+        options['cbar_ticks'] = 7
+        z = np.random.randint(low=0, high=2, size=[2,2,2])
+        options = calculate_cbar_ticks(z, options)
+        assert np.sum(options['cbar_ticks'] - np.linspace(0, 1, 7)) < 1e-5
+
+    def test_calculate_contours(self):
+        options = {}
+        options = set_default_options(options)
+        plot_options = {}
+        z = np.reshape(np.arange(8), [2,2,2])
+        options = calculate_contours(z, options, plot_options)
+        assert np.sum(plot_options['levels'] - np.linspace(0, 7, 11)) < 1e-5
+
+        options = {}
+        options = set_default_options(options)
+        options['ncontours'] = 21
+        plot_options = {}
+        z = np.reshape(np.arange(8), [2,2,2])
+        options = calculate_contours(z, options, plot_options)
+        assert np.sum(plot_options['levels'] - np.linspace(0, 7, 21)) < 1e-5
+
+
