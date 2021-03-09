@@ -1,4 +1,5 @@
 sudo: false
+dist: bionic
 language: python
 python:
   - "3.6"
@@ -13,8 +14,7 @@ notifications:
 addons:
     apt:
         packages:
-        - libpng-dev
-        - libav-tools
+        - ffmpeg
 before_install:
     - pip install -U pip
 # Use Miniconda for faster building
