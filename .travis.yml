@@ -1,8 +1,11 @@
 sudo: false
+dist: bionic
 language: python
 python:
-  - "2.7"
   - "3.6"
+  - "3.7"
+  - "3.8"
+  - "3.9"
 notifications:
     email:
         on_success: change
@@ -11,8 +14,7 @@ notifications:
 addons:
     apt:
         packages:
-        - libpng-dev
-        - libav-tools
+        - ffmpeg
 before_install:
     - pip install -U pip
 # Use Miniconda for faster building

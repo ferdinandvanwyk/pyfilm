@@ -1,6 +1,6 @@
 import os
 
-import pytest
+from pytest import raises
 import numpy as np
 from PIL import Image
 import matplotlib
@@ -72,16 +72,19 @@ class TestClass(object):
     def test_check_data_1d_with_wrong_size(self):
         x = np.arange(5)
         y = np.random.rand(5,4)
-        pytest.raises(ValueError, "check_data_1d(x,y)")
+        with raises(ValueError):
+            check_data_1d(x,y)
 
     def test_check_data_1d_with_wrong_shapes(self):
         x = np.random.rand(5,5)
         y = np.random.rand(5,5)
-        pytest.raises(IndexError, "check_data_1d(x,y)")
+        with raises(IndexError):
+            check_data_1d(x,y)
 
         x = np.arange(5)
         y = np.random.rand(5,5,4)
-        pytest.raises(IndexError, "check_data_1d(x,y)")
+        with raises(IndexError):
+            check_data_1d(x,y)
 
     def test_plot_1d(self):
         x = np.arange(2)
@@ -111,7 +114,8 @@ class TestClass(object):
     def test_1d_argumets(self):
         x = np.arange(2)
         y = np.random.rand(2,2)
-        pytest.raises(ValueError, "make_film_1d(x, x, y)")
+        with raises(ValueError):
+            make_film_1d(x, x, y)
 
     def test_crop_images(self):
         x = np.arange(2)
@@ -159,32 +163,39 @@ class TestClass(object):
         x = np.arange(5)
         y = np.arange(5)
         z = np.random.rand(5,4,5)
-        pytest.raises(ValueError, "check_data_2d(x,y,z)")
+        with raises(ValueError):
+            check_data_2d(x,y,z)
         z = np.random.rand(5,5,4)
-        pytest.raises(ValueError, "check_data_2d(x,y,z)")
+        with raises(ValueError):
+            check_data_2d(x,y,z)
 
     def test_check_data_2d_with_wrong_shapes(self):
         x = np.random.rand(5,5)
         y = np.random.rand(5)
         z = np.random.rand(5,5,5)
-        pytest.raises(IndexError, "check_data_2d(x,y,z)")
+        with raises(IndexError): 
+            check_data_2d(x,y,z)
 
         x = np.random.rand(5)
         y = np.random.rand(5,5)
         z = np.random.rand(5,5,5)
-        pytest.raises(IndexError, "check_data_2d(x,y,z)")
+        with raises(IndexError): 
+            check_data_2d(x,y,z)
 
         x = np.random.rand(5)
         y = np.random.rand(5)
         z = np.random.rand(5,5)
-        pytest.raises(IndexError, "check_data_2d(x,y,z)")
+        with raises(IndexError): 
+            check_data_2d(x,y,z)
 
     def test_2d_argumets(self):
         x = np.arange(2)
         y = np.arange(2)
         z = np.random.rand(2,2,2)
-        pytest.raises(ValueError, "make_film_2d(x, z)")
-        pytest.raises(ValueError, "make_film_2d(x, y, y, z)")
+        with raises(ValueError):
+            make_film_2d(x, z)
+        with raises(ValueError):
+            make_film_2d(x, y, y, z)
 
     def test_make_plot_titles(self, recwarn):
         options = {}
@@ -193,7 +204,8 @@ class TestClass(object):
         assert len(options['title']) == 10
 
         options['title'] = ['test']*9
-        pytest.raises(ValueError, "make_plot_titles(10, options)")
+        with raises(ValueError):
+            make_plot_titles(10, options)
 
     def test_img_fmt(self):
         x = np.arange(2)
