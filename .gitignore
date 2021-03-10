@@ -6,4 +6,4 @@ __pychache__
 build
 dist
 docs/build
-
+.vscode
