@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name="pyfilm",
-    version="0.2.6",
+    version="0.3.0",
     author="Ferdinand van Wyk",
     author_email="ferdinandvwyk@gmail.com",
     description="Easily create 1D and 2D films of NumPy arrays.",
