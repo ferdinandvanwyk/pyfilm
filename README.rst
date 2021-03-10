@@ -17,7 +17,7 @@ Getting Started
 Python version support
 ----------------------
 
-*pyfilm* supports Python 2.x and 3.x, however it is only tested on 3.6 and 2.7.
+*pyfilm* supports Python 3.6-3.9.
 
 Installation
 ------------
@@ -34,8 +34,8 @@ automatically installed, install it first using `pip` and try again.
 System dependencies
 -------------------
 
-*pyfilm* generates a .png file for each timestep and stitches them together using
-ffmpeg/avconv. The following non-system specific packages are therefore
+*pyfilm* generates a .png file for each timestep and stitches them together
+using ffmpeg/avconv. The following non-system specific packages are therefore
 required:
 
 * libpng_
@@ -56,8 +56,8 @@ For OSX using the Brew package manager, these can be installed via:
 *pyfilm* will automatically check which of these is installed on your system
 and default to ``avconv`` if both are found.
 
-Refer to the known issues section in the documentation_ to deal with Matplotlib backends in case plots don't
-display.
+Refer to the known issues section in the documentation_ to deal with Matplotlib
+backends in case plots don't display.
 
 .. _libpng: http://www.libpng.org/pub/png/libpng.html
 .. _libav: https://libav.org/
