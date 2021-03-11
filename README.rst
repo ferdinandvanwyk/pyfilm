@@ -17,7 +17,7 @@ Getting Started
 Python version support
 ----------------------
 
-*pyfilm* supports Python 3.6-3.9.
+*pyfilm* supports Python 3.x.
 
 Installation
 ------------
@@ -40,18 +40,6 @@ required:
 
 * libpng_
 * libav_ or ffmpeg_
-
-For example on Ubuntu 14.04 these are installed via:
-
-.. code:: bash
-
-    sudo apt-get install libpng12-dev libav-tools
-
-For OSX using the Brew package manager, these can be installed via:
-
-.. code:: bash
-
-    brew install libpng ffmpeg
 
 *pyfilm* will automatically check which of these is installed on your system
 and default to ``avconv`` if both are found.
