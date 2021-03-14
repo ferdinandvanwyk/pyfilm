@@ -1,6 +1,13 @@
 #!/usr/bin/env python
-import os
 from setuptools import setup
+
+LONG_DESCRIPTION = """
+PyFilm is a package which enables the quick creation of animations of NumPy
+arrays. It does this by writing each time step as a separate image and using
+either ffmpeg or avconv to stitch the images together into an animation. The
+package is designed to be very easy to use and allow animations to be created
+with a single line.
+"""
 
 setup(
     name="pyfilm",
@@ -8,7 +15,7 @@ setup(
     author="Ferdinand van Wyk",
     author_email="ferdinandvwyk@gmail.com",
     description="Easily create 1D and 2D films of NumPy arrays.",
-    long_description="PyFilm is a package which enables the quick creation of animations of NumPy arrays. It does this by writing each time step as a separate image and using either ffmpeg or avconv to stitch the images together into an animation. The package is designed to be very easy to use, and allow animations to be created with a single line.",
+    long_description=LONG_DESCRIPTION,
     license="GNU",
     keywords=["film", "video", "animation", "numpy", "ffmpeg", "avconv"],
     packages=["pyfilm"],
